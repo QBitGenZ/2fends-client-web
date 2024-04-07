@@ -1,0 +1,25 @@
+.select-item-icon-box {
+    display: inline-block;
+    height: 40px;
+    width: 100px;
+    padding: 5px 0px;
+    align-items: center;
+
+    border: 0.5px solid #9A9A9A;
+    background: #FFF;
+    color: #000;
+
+    text-align: center;
+    font-family: 'Inter', serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 10px;
+}
+
+
+.select-item-icon-box.selected {
+    color: #FFFFFF !important;
+    background: #000 !important;
+}

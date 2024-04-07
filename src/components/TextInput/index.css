@@ -1,0 +1,14 @@
+.text-input {
+    height: 50px;
+
+    border: 1px solid #9A9A9A;
+    background: #FFF;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+.text-input:focus {
+    border: 1px solid #2faed3;
+    background: #FFF;
+}

@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+#content {
+  float: right;
+  width: 80%;
+}
+
+.page-title {
+  text-transform: uppercase;
+}
