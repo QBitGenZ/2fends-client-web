@@ -1,9 +1,15 @@
 // import React from 'react';
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
+import { useNavigate, } from 'react-router-dom';
 import './index.css';
 import PropTypes from 'prop-types';
-export default function Login() {
+export default function Login({ setIsLoggedIn, }) {
   const [activeComponent, setActiveComponent,] = useState('Component1');
+
+  useEffect(() => {
+    localStorage.removeItem('access');
+    setIsLoggedIn(false);
+  }, []);
   return (
     <>
       {activeComponent === 'Component1' && (
@@ -12,13 +18,13 @@ export default function Login() {
           setActiveComponent={setActiveComponent}
         />
       )}
-      {activeComponent === 'Component2' && <Logins2 />}
+      {activeComponent === 'Component2' && <Logins2 setIsLoggedIn={setIsLoggedIn} />}
     </>
   );
 }
 
 Login.propTypes = {
-  setLogin: PropTypes.func,
+  setIsLoggedIn: PropTypes.func,
 };
 
 function Logins1({ activeComponent, setActiveComponent, }) {
@@ -56,9 +62,11 @@ Logins1.propTypes = {
   setActiveComponent: PropTypes.func,
 };
 
-function Logins2() {
+function Logins2({ setIsLoggedIn, }) {
+  const navigation = useNavigate();
   const [username, setUsername,] = useState('');
   const [password, setPassword,] = useState('');
+
   function logine(e) {
     e.preventDefault();
     const form = new FormData();
@@ -78,9 +86,9 @@ function Logins2() {
         else return Promise.reject('Không đúng thông tin đăng nhập');
       })
       .then((data) => {
-        console.log(data);
         localStorage.setItem('access', data?.access);
-        console.log(data);
+        navigation('/');
+        setIsLoggedIn(true);
       })
       .catch((error) => alert(error));
   }
@@ -134,5 +142,5 @@ function Logins2() {
 }
 
 Logins2.propTypes = {
-  setLogin: PropTypes.func,
+  setIsLoggedIn: PropTypes.func,
 };
