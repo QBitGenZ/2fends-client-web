@@ -3,8 +3,9 @@ import sidebar from '~/constants/Sidebar';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import './index.css';
+import { Link, } from 'react-router-dom';
 
-export default function Sidebar({ setPage, }) {
+export default function Sidebar() {
   return (
     <div id={'side-bar'}>
       <div className={'logo-container'}>
@@ -14,26 +15,27 @@ export default function Sidebar({ setPage, }) {
         />
       </div>
       {sidebar.map((item, index) => (
-        <SidebarItem key={index} item={item} setPage={setPage}/>
+        <SidebarItem key={index} item={item}/>
       ))}
     </div>
   );
 }
 
-function SidebarItem({ item, setPage, }) {
+function SidebarItem({ item, }) {
   return (
-    <div className={'side-bar-item '} onClick={() => setPage(item.page)}>
-      <FontAwesomeIcon icon={item.icon} className={'icon'}/>
-      <span className={'label'}>{item?.label}</span>
-    </div>
-  );
+
+    <Link to={item.path}>
+      <div className={'side-bar-item '}>
+        <FontAwesomeIcon icon={item.icon} className={'icon'}/>
+        <span className={'label'}>{item?.label}</span>
+      </div>
+    </Link>
+
+  )
+  ;
 }
 
 SidebarItem.propTypes = {
   item: PropTypes.any,
-  setPage: PropTypes.func,
-};
-
-Sidebar.propTypes = {
   setPage: PropTypes.func,
 };

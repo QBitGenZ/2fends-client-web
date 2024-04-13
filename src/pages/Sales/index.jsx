@@ -1,31 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, } from 'react';
 import { SelectItemBox, Title, } from '~/components';
 import './index.css';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight, } from '@fortawesome/free-solid-svg-icons';
 export default function Sales() {
-  // const [types, setType,] = useState([]);
+  const [types, setType,] = useState([]);
 
-  // useEffect(() => {
-  //   getTypes();
-  // });
+  useEffect(() => {
+    getTypes();
+  }, []);
 
-  // const getTypes = async () => {
-  //   await fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
-  //     method: 'GET',
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem('access')}`,
-  //       Accept: 'application/json',
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setType(data.data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+  const getTypes = async () => {
+    await fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setType(data.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
-  // console.log(types);
+  console.log(types);
   return (
     <div id={'sales'}>
       <div className={'page-title'}>
@@ -34,10 +34,12 @@ export default function Sales() {
         </div>
         <div className={'sales-next'}>
           <p>Tiếp theo</p>
-          <p><FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon></p>
+          <p>
+            <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
+          </p>
         </div>
       </div>
-      <div className={'sales-smallcontainer'}> 
+      <div className={'sales-smallcontainer'}>
         <div>
           <Title>Giới tính</Title>
         </div>
@@ -52,9 +54,9 @@ export default function Sales() {
           <Title>Loại sản phẩm</Title>
         </div>
         <div>
-          <SelectItemBox>Nam</SelectItemBox>
-          <SelectItemBox>Nữ</SelectItemBox>
-          <SelectItemBox>Unisex</SelectItemBox>
+          {types?.map((type) => (
+            <SelectItemBox key={type?.id}>{type?.name}</SelectItemBox>
+          ))}
         </div>
       </div>
       <div className={'sales-smallcontainer'}>
@@ -62,9 +64,12 @@ export default function Sales() {
           <Title>Kích cỡ</Title>
         </div>
         <div>
-          <SelectItemBox>Nam</SelectItemBox>
-          <SelectItemBox>Nữ</SelectItemBox>
-          <SelectItemBox>Unisex</SelectItemBox>
+          <SelectItemBox>S</SelectItemBox>
+          <SelectItemBox>M</SelectItemBox>
+          <SelectItemBox>L</SelectItemBox>
+          <SelectItemBox>XL</SelectItemBox>
+          <SelectItemBox>2XL</SelectItemBox>
+          <SelectItemBox>3XL</SelectItemBox>
         </div>
       </div>
     </div>

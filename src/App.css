@@ -45,3 +45,14 @@
 .page-title {
   text-transform: uppercase;
 }
+
+/* CSS */
+a {
+  text-decoration: none; /* Loại bỏ gạch chân */
+  color: inherit; /* Sử dụng màu sắc mặc định */
+}
+
+a:hover {
+  text-decoration: none; /* Loại bỏ gạch chân khi di chuột qua */
+  color: inherit; /* Sử dụng màu sắc mặc định */
+}

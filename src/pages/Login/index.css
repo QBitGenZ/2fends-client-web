@@ -1,0 +1,105 @@
+.login-container {
+    display: flex;
+    margin: auto;
+  }
+  .login-smallcontainer1{
+    width: 50%;
+  }
+  .login-smallcontainer2{
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  .login-smallcontainer3{
+    width: 50%;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  .loginlogo{
+    margin: 0px auto;
+  
+  }
+  .truycap {
+    color: #000;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .spacelogin {
+    height: 50px;
+  }
+  
+  .sunflower {
+    width: 100%;
+    height: auto;
+  }
+  
+  .logologin {
+    width: 70%;
+    height: auto;
+    flex-shrink: 0;
+    margin: 20px;
+  }
+  
+  .dangnhap {
+    width: 50%;
+    margin: auto;
+    padding: 5px 0px;
+    border: 1px solid #000;
+    background: #d9c0ab;
+    color: #000;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .dangnhap:hover {
+    cursor: pointer;
+    color: white;
+    background: #ac703f;
+  }
+  
+  .loginfeild {
+    border: none;
+    margin: 15px 0px;
+    border-bottom: 1px solid;
+    color: #7c7c7c;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  
+  .loginene {
+    margin: auto;
+    width: 40%;
+    padding: 5px 0px;
+    border: 1px solid #000;
+    background: white;
+    color: #000;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .loginene:hover{
+    background-color: #000;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .loginbtn{
+      margin-top: 30px;
+  }
