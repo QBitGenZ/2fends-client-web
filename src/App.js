@@ -1,18 +1,23 @@
 import './App.css';
-import React, { useState, } from 'react';
-import { Sidebar, } from '~/components';
-import { Information, } from '~/pages';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
+import SidebarData from '~/constants/Sidebar';
+import { Sidebar, } from '~/components'; // Import mảng Sidebar từ file Sidebar.js
 
 function App() {
-  const [page, setPage,] = useState(Information);
-
   return (
-    <div className='App'>
-      <Sidebar setPage={setPage} page={page}/>
-      <div id={'content'}>
-        {page}
+    <Router>
+      <div className='App'>
+        <Sidebar/>
+        <div id='content'>
+          <Routes>
+            {SidebarData.map((item, index) => (
+              <Route key={index} path={item.path} element={<item.page/>} />
+            ))}
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

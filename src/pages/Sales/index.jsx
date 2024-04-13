@@ -8,7 +8,7 @@ export default function Sales() {
 
   useEffect(() => {
     getTypes();
-  });
+  }, []);
 
   const getTypes = async () => {
     await fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
