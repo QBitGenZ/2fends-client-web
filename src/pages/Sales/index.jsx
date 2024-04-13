@@ -1,9 +1,9 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { SelectItemBox, Title, } from '~/components';
 import './index.css';
-
+import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
+import { faAngleRight, } from '@fortawesome/free-solid-svg-icons';
 export default function Sales() {
-
   const [types, setType,] = useState([]);
 
   useEffect(() => {
@@ -24,14 +24,22 @@ export default function Sales() {
       })
       .catch((error) => console.log(error));
   };
-  
+
   console.log(types);
   return (
     <div id={'sales'}>
       <div className={'page-title'}>
-        <Title>Đăng bán sản phẩm</Title>
+        <div className='sales-title'>
+          <p>Đăng bán sản phẩm</p>
+        </div>
+        <div className={'sales-next'}>
+          <p>Tiếp theo</p>
+          <p>
+            <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
+          </p>
+        </div>
       </div>
-      <div>
+      <div className={'sales-smallcontainer'}>
         <div>
           <Title>Giới tính</Title>
         </div>
@@ -41,24 +49,27 @@ export default function Sales() {
           <SelectItemBox>Unisex</SelectItemBox>
         </div>
       </div>
-      <div>
+      <div className={'sales-smallcontainer'}>
         <div>
           <Title>Loại sản phẩm</Title>
         </div>
         <div>
           {types?.map((type) => (
-            <SelectItemBox key={type?.id}> {type?.name} </SelectItemBox>
+            <SelectItemBox key={type?.id}>{type?.name}</SelectItemBox>
           ))}
         </div>
       </div>
-      <div>
+      <div className={'sales-smallcontainer'}>
         <div>
           <Title>Kích cỡ</Title>
         </div>
         <div>
-          <SelectItemBox>Nam</SelectItemBox>
-          <SelectItemBox>Nữ</SelectItemBox>
-          <SelectItemBox>Unisex</SelectItemBox>
+          <SelectItemBox>S</SelectItemBox>
+          <SelectItemBox>M</SelectItemBox>
+          <SelectItemBox>L</SelectItemBox>
+          <SelectItemBox>XL</SelectItemBox>
+          <SelectItemBox>2XL</SelectItemBox>
+          <SelectItemBox>3XL</SelectItemBox>
         </div>
       </div>
     </div>
