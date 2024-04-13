@@ -4,6 +4,35 @@ import './index.css';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight, } from '@fortawesome/free-solid-svg-icons';
 export default function Sales() {
+  const [mainstage, setMainStage,] = useState(true);
+  const [stage1, setStage1,] = useState(false);
+  const openS1 = () => {
+    setStage1(true);
+    setMainStage(false);
+  };
+  return (
+    <>{
+      mainstage && 
+      <div id={'sales'}>
+        <div className={'page-title'}>
+          <div className='sales-title'>
+            <p>Đăng bán sản phẩm</p>
+          </div>
+          <div className={'sales-next'} onClick={openS1}>
+            <p>Tiếp theo</p>
+            <p>
+              <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+    {stage1 && <SaleStage1/>}
+    </>
+  );
+}
+
+function SaleStage1() {
   const [types, setType,] = useState([]);
 
   useEffect(() => {
@@ -25,7 +54,6 @@ export default function Sales() {
       .catch((error) => console.log(error));
   };
 
-  console.log(types);
   return (
     <div id={'sales'}>
       <div className={'page-title'}>
