@@ -1,37 +1,43 @@
-import React, { useEffect, useState, } from 'react';
+import React from 'react';
 import { SelectItemBox, Title, } from '~/components';
 import './index.css';
-
+import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
+import { faAngleRight, } from '@fortawesome/free-solid-svg-icons';
 export default function Sales() {
+  // const [types, setType,] = useState([]);
 
-  const [types, setType,] = useState([]);
+  // useEffect(() => {
+  //   getTypes();
+  // });
 
-  useEffect(() => {
-    getTypes();
-  });
+  // const getTypes = async () => {
+  //   await fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
+  //     method: 'GET',
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem('access')}`,
+  //       Accept: 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setType(data.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
-  const getTypes = async () => {
-    await fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setType(data.data);
-      })
-      .catch((error) => console.log(error));
-  };
-  
-  console.log(types);
+  // console.log(types);
   return (
     <div id={'sales'}>
       <div className={'page-title'}>
-        <Title>Đăng bán sản phẩm</Title>
+        <div className='sales-title'>
+          <p>Đăng bán sản phẩm</p>
+        </div>
+        <div className={'sales-next'}>
+          <p>Tiếp theo</p>
+          <p><FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon></p>
+        </div>
       </div>
-      <div>
+      <div className={'sales-smallcontainer'}> 
         <div>
           <Title>Giới tính</Title>
         </div>
@@ -41,17 +47,17 @@ export default function Sales() {
           <SelectItemBox>Unisex</SelectItemBox>
         </div>
       </div>
-      <div>
+      <div className={'sales-smallcontainer'}>
         <div>
           <Title>Loại sản phẩm</Title>
         </div>
         <div>
-          {types?.map((type) => (
-            <SelectItemBox key={type?.id}> {type?.name} </SelectItemBox>
-          ))}
+          <SelectItemBox>Nam</SelectItemBox>
+          <SelectItemBox>Nữ</SelectItemBox>
+          <SelectItemBox>Unisex</SelectItemBox>
         </div>
       </div>
-      <div>
+      <div className={'sales-smallcontainer'}>
         <div>
           <Title>Kích cỡ</Title>
         </div>
