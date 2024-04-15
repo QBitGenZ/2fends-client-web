@@ -1,6 +1,6 @@
 import React, { useEffect, useState, } from 'react';
 import './index.css';
-import { SelectItemBox, TextAreaInput, TextInput, Title, } from '~/components';
+import { HeadTitle, SelectItemBox, TextAreaInput, TextInput, Title, } from '~/components';
 import DateTimeInput from '~/components/DateTimeInput';
 
 export default function Donation() {
@@ -31,9 +31,7 @@ export default function Donation() {
 
   return (
     <div id={'donation'}>
-      <div className={'header-title'}>
-        Tạo sự kiện quyên góp
-      </div>
+      <HeadTitle>Tạo sự kiện quyên góp</HeadTitle>
       <div>
         <div>
           <Title>Tên sự kiện</Title>

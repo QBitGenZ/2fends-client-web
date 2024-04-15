@@ -1,6 +1,7 @@
 import React, { useState, useEffect, } from 'react';
 import './index.css';
 import PropTypes from 'prop-types';
+import { HeadTitle, } from '~/components';
 export default function Information() {
   const [info, setInfo,] = useState([]);
   const [mainStage, setMainStge,] = useState(true);
@@ -38,9 +39,7 @@ export default function Information() {
       {mainStage && (
         <>
           <div className={'infopage-title'}>
-            <div className={'info-title'}>
-              <p>THÔNG TIN TÀI KHOẢN</p>
-            </div>
+            <HeadTitle>Thông tin tài khoản</HeadTitle>
           </div>
           <table className={'info-table'}>
             <tr>
