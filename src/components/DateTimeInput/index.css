@@ -1,0 +1,20 @@
+.text-input {
+    border: 1px solid #9A9A9A;
+    background: #FFF;
+    padding: 10px;
+    margin: 10px;
+
+    font-family: 'Inter', serif;
+    font-size: 18px;
+}
+
+.text-input::placeholder {
+    font-family: 'Inter', serif;
+}
+
+
+
+.text-input:focus {
+    border: 1px solid #2faed3;
+    background: #FFF;
+}
