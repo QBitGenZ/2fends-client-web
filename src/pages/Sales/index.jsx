@@ -3,7 +3,9 @@ import { HeadTitle, SelectItemBox, Title, } from '~/components';
 import './index.css';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faAngleLeft, faClose, } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight,
+  faAngleLeft,
+  faClose, } from '@fortawesome/free-solid-svg-icons';
 export default function Sales() {
   const [mainstage, setMainStage,] = useState(true);
   const [stage1, setStage1,] = useState(false);
@@ -84,16 +86,16 @@ function SaleStage1({ stage1, setStage1, setStage2, setMainStage, }) {
       {stage1 && (
         <div id={'sales'}>
           <div className={'page-title'}>
-            <div className='sales-title'>
-              <p
-                style={{
-                  paddingRight: 5,
-                }}
-                onClick={backMainStage}
-              >
-                <FontAwesomeIcon icon={faAngleLeft}></FontAwesomeIcon>
-              </p>
-              <p>Đăng bán sản phẩm</p>
+            <div className='sales-title' onClick={backMainStage}>
+              <HeadTitle>
+                <FontAwesomeIcon
+                  style={{
+                    paddingRight: '10px',
+                  }}
+                  icon={faAngleLeft}
+                ></FontAwesomeIcon>
+              </HeadTitle>
+              <HeadTitle>Đăng bán sản phẩm</HeadTitle>
             </div>
             <div className={'sales-next'} onClick={openS2}>
               <p>Tiếp theo</p>
@@ -152,13 +154,13 @@ function SaleStage2({ stage2, setStage2, setStage1, }) {
   const handleImageChange = (event) => {
     const files = event.target.files;
     setImageFiles([...files,]);
-  };  
+  };
 
   const handleRemoveImage = (index) => {
     const updatedImages = [...imageFiles,];
     updatedImages.splice(index, 1);
     setImageFiles(updatedImages);
-  };  
+  };
 
   return (
     <>
@@ -166,17 +168,18 @@ function SaleStage2({ stage2, setStage2, setStage1, }) {
         <div id={'sales'}>
           <div className={'page-title'}>
             <div className='sales-title' onClick={backStage1}>
-              <p
-                style={{
-                  paddingRight: 5,
-                }}
-              >
-                <FontAwesomeIcon icon={faAngleLeft}></FontAwesomeIcon>
-              </p>
-              <p>Đăng bán sản phẩm</p>
+              <HeadTitle>
+                <FontAwesomeIcon
+                  style={{
+                    paddingRight: '10px',
+                  }}
+                  icon={faAngleLeft}
+                ></FontAwesomeIcon>
+              </HeadTitle>
+              <HeadTitle>Đăng bán sản phẩm</HeadTitle>
             </div>
             <div className={'sales-next'}>
-              <p>Tiếp theo</p>
+              <p>Đăng bán sản phẩm</p>
               <p>
                 <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
               </p>
@@ -184,14 +187,15 @@ function SaleStage2({ stage2, setStage2, setStage1, }) {
           </div>
           <div id={'Add-Product'}>
             <Title>Tên sản phẩm</Title>
-            <textarea rows={2} /> {/* TODO: Thay đỏi này thành component có sẵn. Tạo useState cho nó và css để có khoảng cách */}
+            <textarea rows={2} />{' '}
+            {/* TODO: Thay đỏi này thành component có sẵn. Tạo useState cho nó và css để có khoảng cách */}
             <Title>Giá sản phẩm</Title>
             <textarea rows={2} />
             <Title>Mô tả sản phẩm</Title>
             <textarea rows={2} />
             <Title>Hình ảnh</Title>
             <div className='add-images-component'>
-              <label htmlFor={'add-images'}>Thêm ảnh</label> 
+              <label htmlFor={'add-images'}>Thêm ảnh</label>
               <input
                 id='add-images'
                 className={'input-password'}
@@ -204,17 +208,18 @@ function SaleStage2({ stage2, setStage2, setStage1, }) {
                 }}
               />
             </div>
-           
             <div className='image-preview'>
               {imageFiles.map((file, index) => (
                 <div key={index} className='image-container'>
-                  <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} />
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt={`Preview ${index}`}
+                  />
                   <button onClick={() => handleRemoveImage(index)}>
-                    <FontAwesomeIcon icon={faClose}/>
+                    <FontAwesomeIcon icon={faClose} />
                   </button>
                 </div>
               ))}
-
             </div>
           </div>
         </div>
