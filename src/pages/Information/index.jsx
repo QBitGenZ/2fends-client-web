@@ -136,99 +136,95 @@ function UpdateInformation({ info, getInfo, setMainStge, setUpdateStage, }) {
   };
   return (
     <>
-      <div id={'personal-information'}>
-        <div className={'infopage-title'}>
-          <div className={'info-title'}>
-            <p>THÔNG TIN TÀI KHOẢN</p>
-          </div>
-        </div>
-        <table className={'info-table'}>
-          <tr>
-            <td className={'info-th'}>Tên tài khoản</td>
-            <td>
-              <input
-                type='text'
-                id='full_name'
-                name='full_name'
-                className={'updatefield'}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Tên người dùng</td>
-            <td>
-              <input
-                type='text'
-                id='full_name'
-                name='full_name'
-                className={'updatefield'}
-                value={full_name}
-                onChange={(e) => setFullname(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Ngày sinh</td>
-            <td>
-              <input
-                type='date'
-                id='birthday'
-                name='birthday'
-                className='updatefield'
-                value={birthday}
-                onChange={(e) => setBirthday(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Giới tính</td>
-            <td>
-              <input
-                name='gender'
-                value={gender}
-                className='updatefield'
-                onChange={(e) => setGender(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Số điện thoại</td>
-            <td>
-              <input
-                type='tel'
-                id='phone'
-                name='phone'
-                className='updatefield'
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Email</td>
-            <td>
-              <input
-                type='email'
-                id='email'
-                name='email'
-                className='updatefield'
-                value={email}
-                placeholder='Enter your email address'
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </td>
-          </tr>
-        </table>
-        <div>
-          <button className={'update-btn'} onClick={backMainStage}>
-            Hủy
-          </button>
-          <button className={'changepass-btn'} onClick={changeInfor}>
-            Lưu thay đổi
-          </button>
-        </div>
+      <div className={'infopage-title'}>
+        <HeadTitle>Thông tin tài khoản</HeadTitle>
+      </div>
+      <table className={'info-table'}>
+        <tr>
+          <td className={'info-th'}>Tên tài khoản</td>
+          <td>
+            <input
+              type='text'
+              id='full_name'
+              name='full_name'
+              className={'updatefield'}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Tên người dùng</td>
+          <td>
+            <input
+              type='text'
+              id='full_name'
+              name='full_name'
+              className={'updatefield'}
+              value={full_name}
+              onChange={(e) => setFullname(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Ngày sinh</td>
+          <td>
+            <input
+              type='date'
+              id='birthday'
+              name='birthday'
+              className='updatefield'
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Giới tính</td>
+          <td>
+            <input
+              name='gender'
+              value={gender}
+              className='updatefield'
+              onChange={(e) => setGender(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Số điện thoại</td>
+          <td>
+            <input
+              type='tel'
+              id='phone'
+              name='phone'
+              className='updatefield'
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Email</td>
+          <td>
+            <input
+              type='email'
+              id='email'
+              name='email'
+              className='updatefield'
+              value={email}
+              placeholder='Enter your email address'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </td>
+        </tr>
+      </table>
+      <div>
+        <button className={'update-btn'} onClick={backMainStage}>
+          Hủy
+        </button>
+        <button className={'changepass-btn'} onClick={changeInfor}>
+          Lưu thay đổi
+        </button>
       </div>
     </>
   );
@@ -269,58 +265,54 @@ function ChangePassword({ info, setMainStge, setChangePassStage, getInfo, }) {
 
   return (
     <>
-      <div id={'personal-information'}>
-        <div className={'infopage-title'}>
-          <div className={'info-title'}>
-            <p>THÔNG TIN TÀI KHOẢN</p>
-          </div>
-        </div>
-        <table className={'info-table'}>
-          <tr>
-            <td className={'info-th'}>Mật khẩu cũ</td>
-            <td>
-              <input
-                type='text'
-                id='full_name'
-                name='full_name'
-                className={'updatefield'}
-                onChange={(e) => setOldPass(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Mật khẩu cũ</td>
-            <td className={'info-th'}>
-              <input
-                type='text'
-                id='full_name'
-                name='full_name'
-                className={'updatefield'}
-                onChange={(e) => setNewPass(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className={'info-th'}>Xác nhận mật khẩu</td>
-            <td className={'info-th'}>
-              <input
-                type='text'
-                id='full_name'
-                name='full_name'
-                className={'updatefield'}
-                onChange={(e) => setConfirm(e.target.value)}
-              />
-            </td>
-          </tr>
-        </table>
-        <div>
-          <button className={'update-btn'} onClick={backMainStage}>
-            Hủy
-          </button>
-          <button className={'changepass-btn'} onClick={changeInfor}>
-            Lưu thay đổi
-          </button>
-        </div>
+      <div className={'infopage-title'}>
+        <HeadTitle>Thông tin tài khoản</HeadTitle>
+      </div>
+      <table className={'info-table'}>
+        <tr>
+          <td className={'info-th'}>Mật khẩu cũ</td>
+          <td>
+            <input
+              type='text'
+              id='full_name'
+              name='full_name'
+              className={'updatefield'}
+              onChange={(e) => setOldPass(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Mật khẩu cũ</td>
+          <td className={'info-th'}>
+            <input
+              type='text'
+              id='full_name'
+              name='full_name'
+              className={'updatefield'}
+              onChange={(e) => setNewPass(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td className={'info-th'}>Xác nhận mật khẩu</td>
+          <td className={'info-th'}>
+            <input
+              type='text'
+              id='full_name'
+              name='full_name'
+              className={'updatefield'}
+              onChange={(e) => setConfirm(e.target.value)}
+            />
+          </td>
+        </tr>
+      </table>
+      <div>
+        <button className={'update-btn'} onClick={backMainStage}>
+          Hủy
+        </button>
+        <button className={'changepass-btn'} onClick={changeInfor}>
+          Lưu thay đổi
+        </button>
       </div>
     </>
   );

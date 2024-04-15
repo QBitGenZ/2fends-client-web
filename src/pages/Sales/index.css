@@ -10,16 +10,18 @@
   display: flex;
 }
 #sales .sales-next p {
+  text-align: right;
   padding: 5px;
   margin-top: auto;
   color: #000;
   text-align: center;
-  font-family: "Roboto";
+  font-family: "Inter";
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
+
 #sales .sales-title {
   color: #000;
   font-family: "Roboto";
@@ -28,7 +30,7 @@
   font-weight: 500;
   line-height: normal;
   display: flex;
-  width: 85%;
+  width: 80%;
 }
 
 #sales .sales-smallcontainer {
