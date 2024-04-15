@@ -86,7 +86,7 @@ function SaleStage1({ stage1, setStage1, setStage2, setMainStage, }) {
       {stage1 && (
         <div id={'sales'}>
           <div className={'page-title'}>
-            <div className='sales-title' onClick={backMainStage}>
+            <div className={'sales-title'} onClick={backMainStage}>
               <HeadTitle>
                 <FontAwesomeIcon
                   style={{
