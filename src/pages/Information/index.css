@@ -1,0 +1,60 @@
+#personal-information .info-th {
+  text-align: left;
+}
+
+#personal-information .info-table {
+  margin: auto;
+  padding: 7% 27%;
+  border-spacing: 20px;
+  border: solid 1px black;
+  width: 95%;
+  border-radius: 10px;
+  border: 1px solid #cfcfcf;
+  background: #fff;
+}
+
+#personal-information .info-table td {
+  text-align: left;
+  justify-items: left;
+  color: #000;
+  font-family: "Source Sans Pro";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#personal-information .infopage-title {
+  display: flex;
+  width: 100%;
+}
+
+#personal-information .info-title {
+  text-transform: uppercase;
+  color: #000;
+  font-family: "Roboto";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  width: 85%;
+}
+
+#personal-information .update-btn,
+.changepass-btn {
+  width: 250px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #cfcfcf;
+  background: #f9f3e9;
+  color: #000;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 3%;
+}
