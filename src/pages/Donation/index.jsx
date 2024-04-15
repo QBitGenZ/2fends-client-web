@@ -8,7 +8,8 @@ import { HeadTitle,
 import DateTimeInput from '~/components/DateTimeInput';
 import moment from 'moment';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
-import { faAngleLeft,faArrowUpFromBracket, } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft,
+  faArrowUpFromBracket, } from '@fortawesome/free-solid-svg-icons';
 
 export default function Donation() {
   const [name, setName,] = useState('');
@@ -40,9 +41,17 @@ export default function Donation() {
 
   const addEvent = (e) => {
     e.preventDefault();
+    let selectedItems = document.querySelectorAll('.select-item-box.selected');
+    selectedItems = Array.from(selectedItems).map((item) => {
+      return `<li>${item.textContent}</li>`;
+    });
+    selectedItems = selectedItems.join('');
+    const newDescription=description+'\nDanh mục sản phẩm kêu gọi: ' +
+    `<ul>${selectedItems}</ul>`;
+    console.log(newDescription);
     const form = new FormData();
     form.append('name', name);
-    form.append('description', description);
+    form.append('description', newDescription);
     form.append('beginAt', changeTime(startTime));
     form.append('endAt', changeTime(endTime));
     fetch(`${process.env.REACT_APP_HOST_IP}/events/`, {
@@ -87,7 +96,6 @@ export default function Donation() {
         <div>
           <Title>Tên sự kiện</Title>
         </div>
-
         <TextInput
           setValue={setName}
           placeholder={'Nhập tên sự kiện'}
@@ -123,10 +131,11 @@ export default function Donation() {
         <div>
           <Title>Danh mục sản phẩm cần kêu gọi</Title>
         </div>
-
-        {productTypes.map((item) => {
-          return <SelectItemBox key={item?.id}>{item?.name}</SelectItemBox>;
-        })}
+        <div>
+          {productTypes.map((item) => {
+            return <SelectItemBox key={item?.id}>{item?.name}</SelectItemBox>;
+          })}
+        </div>
       </div>
     </div>
   );
