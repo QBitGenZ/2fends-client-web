@@ -8,6 +8,7 @@ export default function Sales() {
   const [mainstage, setMainStage,] = useState(true);
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
+
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
