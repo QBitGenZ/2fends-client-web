@@ -14,5 +14,5 @@ export default function SelectItemBox({ children, value, }) {
 
 SelectItemBox.propTypes = {
   children: PropTypes.any.isRequired,
-  value: PropTypes.any,
+  value: PropTypes.string,
 };
