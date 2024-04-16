@@ -39,11 +39,8 @@ export default function SaleStage1({
   };
   const addInnformation = () => {
     const gender = document.querySelector('.gender>.select-item-box.selected').textContent;
-    const product_type=document.querySelector('.product-type>.select-item-box.selected');
+    const product_type=document.querySelector('.product-type>.select-item-box.selected').getAttribute('id');
     const product_size=document.querySelector('.product-size>.select-item-box.selected').textContent;
-    console.log(gender);
-    console.log(product_type);
-    console.log(product_size);
     setNewProduct({
       gender:gender,
       product_type:product_type,
@@ -89,7 +86,7 @@ export default function SaleStage1({
             </div>
             <div className={'product-type'}>
               {types?.map((type) => (
-                <SelectItemBox key={type?.id} data-id={type?.id}>{type?.name}</SelectItemBox>
+                <SelectItemBox key={type?.id} value={type?.id}>{type?.name}</SelectItemBox>
               ))}
             </div>
           </div>
