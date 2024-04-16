@@ -18,7 +18,9 @@ export default function Login({ setIsLoggedIn, }) {
           setActiveComponent={setActiveComponent}
         />
       )}
-      {activeComponent === 'Component2' && <Logins2 setIsLoggedIn={setIsLoggedIn} />}
+      {activeComponent === 'Component2' && (
+        <Logins2 setIsLoggedIn={setIsLoggedIn} />
+      )}
     </>
   );
 }
@@ -38,14 +40,14 @@ function Logins1({ activeComponent, setActiveComponent, }) {
       <div className={'login-smallcontainer1'}>
         <img
           className={'sunflower'}
-          src={process.env.PUBLIC_URL + 'assets/images/login/sunflower.jpg'}
+          src={process.env.PUBLIC_URL + 'assets/images/commons/sunflower.jpg'}
         ></img>
       </div>
       <div className={'login-smallcontainer2'}>
         <div className={'smallercontainer'}>
           <img
             className='logologin'
-            src={process.env.PUBLIC_URL + 'assets/images/login/logo.png'}
+            src={process.env.PUBLIC_URL + 'assets/images/commons/logo.png'}
             alt={'logo'}
           />
         </div>

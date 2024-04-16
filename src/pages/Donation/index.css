@@ -2,9 +2,38 @@
     text-align: left;
     padding-top: 46px;
 }
-
-
 #donation input, #donation textarea {
     width: 60%;
     margin: 15px 0 30px 0;
 }
+
+#donation .donationpage-title {
+    display: flex;
+    width: 100%;
+  }
+  #donation .donations-next {
+    display: flex;
+  }
+  #donation .donations-next p {
+    text-align: right;
+    padding: 5px;
+    margin-top: auto;
+    color: #000;
+    text-align: center;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  #donation .donations-title {
+    color: #000;
+    font-family: "Roboto";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    width: 80%;
+  }
