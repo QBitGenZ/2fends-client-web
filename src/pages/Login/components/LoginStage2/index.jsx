@@ -1,20 +1,20 @@
-import React, { useState, } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { useNavigate, } from 'react-router-dom';
 import PropTypes from 'prop-types';
 export default function Logins2({ setIsLoggedIn, }) {
   const navigation = useNavigate();
   const [username, setUsername,] = useState('');
   const [password, setPassword,] = useState('');
-  // useEffect(() => {
-  //   const keyDownHandler = event => {
-  //     console.log('User pressed: ', event.key);
+  useEffect(() => {
+    const keyDownHandler = event => {
+      console.log('User pressed: ', event.key);
 
-  //     if (event.key === 'Enter') {
-  //       logine();
-  //     }
-  //   };
-  //   document.addEventListener('keydown', keyDownHandler);
-  // }, []);
+      if (event.key === 'Enter') {
+        logine();
+      }
+    };
+    document.addEventListener('keydown', keyDownHandler);
+  }, []);
   function logine(e) {
     e.preventDefault();
     const form = new FormData();

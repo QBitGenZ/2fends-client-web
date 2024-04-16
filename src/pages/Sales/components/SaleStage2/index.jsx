@@ -15,7 +15,6 @@ export default function SaleStage2({
   const [proPrice, setProPrice,] = useState();
   const [proQuantity, setQuantity,] = useState();
   const [proDescription, setProDescription,] = useState();
-  // const [proImage, setProImage,] = useState();
   const backStage1 = () => {
     setStage2(false);
     setStage1(true);
@@ -32,6 +31,23 @@ export default function SaleStage2({
     const updatedImages = [...imageFiles,];
     updatedImages.splice(index, 1);
     setImageFiles(updatedImages);
+  };
+  const addImage = (ProductID) =>{
+    imageFiles.map((imageFile)=>{
+      const form = new FormData();
+      form.append('src',imageFile);
+      form.append('product',ProductID);
+      form.append('alt','Anh thay the');
+      fetch(`${process.env.REACT_APP_HOST_IP}/products/images/`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          Accept: 'application/json',
+        }, body:form,
+      })
+        .then((res) => res.json())
+        .catch((error) => console.log(error));
+    });
   };
   const createProduct = ()=>{
     const form = new FormData();
@@ -51,7 +67,10 @@ export default function SaleStage2({
       }, body:form,
     })
       .then((res) => res.json())
-      .then((data)=>console.log(data))
+      .then((data)=>{ 
+        console.log(data.data.id);
+        addImage(data.data.id);
+      })
       .catch((error) => console.log(error));
 
   };
