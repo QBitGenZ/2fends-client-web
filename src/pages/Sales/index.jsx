@@ -7,6 +7,7 @@ export default function Sales() {
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
   const [products, setProduct,] = useState([]);
+  const [newProduct, setNewProduct, ] = useState(null);
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
@@ -14,7 +15,6 @@ export default function Sales() {
   useEffect(() => {
     getProducts();
   }, []);
-
   const getProducts = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
       method: 'GET',
@@ -55,6 +55,7 @@ export default function Sales() {
           setMainStage={setMainStage}
           setStage1={setStage1}
           setStage2={setStage2}
+          setNewProduct={setNewProduct}
         />
       )}
       {stage2 && (
@@ -62,6 +63,8 @@ export default function Sales() {
           stage2={stage2}
           setStage2={setStage2}
           setStage1={setStage1}
+          newProduct={newProduct}
+          setNewProduct={setNewProduct}
         />
       )}
     </>
