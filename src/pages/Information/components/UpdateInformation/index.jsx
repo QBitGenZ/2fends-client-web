@@ -31,10 +31,13 @@ export default function UpdateInformation({
       body: form,
     })
       .then((res) => {
-        if (res.status === 200) return res.json();
-        else return Promise.reject('Thông tin không hợp lệ');
+        if (res.status === 200) return (
+          res.json(),
+          alert('Chỉnh sửa thông tin thành công'),
+          backMainStage()
+        );
+        else return Promise.reject('Không đúng thông tin');
       })
-      .then((res) => res.json)
       .then(() => getInfo())
       .catch((error) => alert(error));
   }

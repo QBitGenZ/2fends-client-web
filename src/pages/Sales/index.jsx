@@ -1,15 +1,33 @@
-import React, { useState, } from 'react';
-import { HeadTitle, SelectItemBox, Title, } from '~/components';
+import React, { useState, useEffect, } from 'react';
+import { HeadTitle, Title, } from '~/components';
 import './index.css';
-import { SaleStage1, SaleStage2, } from './components';
+import { ProductContainer, SaleStage1, SaleStage2, } from './components';
 export default function Sales() {
   const [mainstage, setMainStage,] = useState(true);
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
-
+  const [products, setProduct,] = useState([]);
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
+  };
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data.data);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <>
@@ -24,9 +42,9 @@ export default function Sales() {
               <Title>Danh sách sản phẩm</Title>
             </div>
             <div>
-              <SelectItemBox>Nam</SelectItemBox>
-              <SelectItemBox>Nữ</SelectItemBox>
-              <SelectItemBox>Unisex</SelectItemBox>
+              {products.map((product) => (
+                <ProductContainer key='product?.id' product={product} />
+              ))}
             </div>
           </div>
         </div>

@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useState, } from 'react';
-import { HeadTitle, Title, } from '~/components';
+import { HeadTitle, TextAreaInput, TextInput, Title, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight,
-  faAngleLeft, faClose, } from '@fortawesome/free-solid-svg-icons';
+  faAngleLeft,
+  faClose, } from '@fortawesome/free-solid-svg-icons';
 export default function SaleStage2({ stage2, setStage2, setStage1, }) {
   const backStage1 = () => {
     setStage2(false);
@@ -47,28 +48,45 @@ export default function SaleStage2({ stage2, setStage2, setStage1, }) {
             </div>
           </div>
           <div id={'Add-Product'}>
-            <Title>Tên sản phẩm</Title>
-            <textarea rows={2} />{' '}
-            {/* TODO: Thay đỏi này thành component có sẵn. Tạo useState cho nó và css để có khoảng cách */}
-            <Title>Giá sản phẩm</Title>
-            <textarea rows={2} />
-            <Title>Mô tả sản phẩm</Title>
-            <textarea rows={2} />
-            <Title>Hình ảnh</Title>
-            <div className='add-images-component'>
-              <label htmlFor={'add-images'}>Thêm ảnh</label>
-              <input
-                id='add-images'
-                className={'input-password'}
-                type='file'
-                multiple
-                onChange={handleImageChange}
-                rows={2}
-                style={{
-                  display: 'none',
-                }}
-              />
+            <div>
+              <div>
+                <Title>Tên sản phẩm</Title>
+              </div>
+              <TextInput />
             </div>
+            <div>
+              <div>
+                <Title>Giá sản phẩm</Title>
+              </div>
+              <TextInput />
+            </div>
+            {/* TODO: Thay đỏi này thành component có sẵn. Tạo useState cho nó và css để có khoảng cách */}
+            <div>
+              <div>
+                <Title>Mô tả sản phẩm</Title>
+              </div>
+              <TextAreaInput/>
+            </div>
+            <div>
+              <div>
+                <Title>Hình ảnh</Title>
+              </div> 
+              <div className='add-images-component'>
+                <label htmlFor={'add-images'}>Thêm ảnh</label>
+                <input
+                  id='add-images'
+                  className={'input-password'}
+                  type='file'
+                  multiple
+                  onChange={handleImageChange}
+                  rows={2}
+                  style={{
+                    display: 'none',
+                  }}
+                />
+              </div>
+            </div>
+
             <div className='image-preview'>
               {imageFiles.map((file, index) => (
                 <div key={index} className='image-container'>
