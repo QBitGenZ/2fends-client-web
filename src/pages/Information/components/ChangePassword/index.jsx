@@ -12,13 +12,15 @@ export default function ChangePassword({
   const [confirm, setConfirm,] = useState();
 
   function changeInfor(e) {
+    if(confirm != newpass) {
+      return alert('Không khớp');
+    }
     e.preventDefault();
     const form = new FormData();
     console.log(info);
-    form.append('oldpass', oldpass);
-    form.append('newpass', newpass);
-    form.append('confirm', confirm);
-    fetch(`${process.env.REACT_APP_HOST_IP}/user`, {
+    form.append('old_password', oldpass);
+    form.append('new_password', newpass);
+    fetch(`${process.env.REACT_APP_HOST_IP}/change-password`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
