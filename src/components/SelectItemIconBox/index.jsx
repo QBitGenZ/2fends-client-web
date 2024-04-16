@@ -3,11 +3,11 @@ import React, { useState, } from 'react';
 import './index.css';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 
-export default function SelectItemIconBox({ children, icon, }) {
+export default function SelectItemIconBox({ children, icon, value, }) {
   const [selected, setSelected,] = useState(false);
 
   return (
-    <div className={'select-item-icon-box ' + (selected ? 'selected' : '')} onClick={() => setSelected(!selected)}>
+    <div className={'select-item-icon-box ' + (selected ? 'selected' : '')} id={value} onClick={() => setSelected(!selected)}>
       <div><FontAwesomeIcon icon={icon}/></div>
       <div>{children}</div>
     </div>
@@ -17,4 +17,5 @@ export default function SelectItemIconBox({ children, icon, }) {
 SelectItemIconBox.propTypes = {
   icon: PropTypes.any.isRequired,
   children: PropTypes.any.isRequired,
+  value: PropTypes.any,
 };

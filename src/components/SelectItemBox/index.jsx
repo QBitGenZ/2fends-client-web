@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useState, } from 'react';
 import './index.css';
 
-export default function SelectItemBox({ children, }) {
+export default function SelectItemBox({ children, value, }) {
   const [selected, setSelected,] = useState(false);
 
   return (
-    <div className={'select-item-box ' + (selected ? 'selected' : '')} onClick={() => setSelected(!selected)}>
+    <div className={'select-item-box ' + (selected ? 'selected' : '')} id={value} onClick={() => setSelected(!selected)}>
       {children}
     </div>
   );
@@ -14,4 +14,5 @@ export default function SelectItemBox({ children, }) {
 
 SelectItemBox.propTypes = {
   children: PropTypes.any.isRequired,
+  value: PropTypes.any,
 };
