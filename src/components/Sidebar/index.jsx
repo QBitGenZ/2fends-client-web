@@ -11,6 +11,9 @@ export default function Sidebar() {
       <div className={'logo-container'}>
         <img
           key={'logo'}
+          style={{
+            width:'100%',
+          }}
           src={`${process.env.PUBLIC_URL}assets/images/commons/logo.png`}
         />
       </div>
