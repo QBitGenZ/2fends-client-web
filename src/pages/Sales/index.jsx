@@ -18,7 +18,7 @@ export default function Sales() {
     getProducts();
   }, []);
   const getProducts = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/events/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -53,7 +53,7 @@ export default function Sales() {
               totalPage={totalPage}
               currentPage={currentPage}
               onPageChange={setCurrentPage}
-            ></Pagination>
+            />
           </div>
         </div>
       )}

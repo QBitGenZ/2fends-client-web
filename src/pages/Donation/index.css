@@ -1,39 +1,194 @@
 #donation {
-    text-align: left;
-    padding-top: 46px;
+  text-align: left;
+  padding-top: 46px;
 }
-#donation input, #donation textarea {
-    width: 60%;
-    margin: 15px 0 30px 0;
+#donation input,
+#donation textarea {
+  width: 60%;
+  margin: 15px 0 30px 0;
 }
 
 #donation .donationpage-title {
-    display: flex;
-    width: 100%;
-  }
-  #donation .donations-next {
-    display: flex;
-  }
-  #donation .donations-next p {
-    text-align: right;
-    padding: 5px;
-    margin-top: auto;
-    color: #000;
-    text-align: center;
-    font-family: "Inter";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  
-  #donation .donations-title {
-    color: #000;
-    font-family: "Roboto";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    display: flex;
-    width: 80%;
-  }
+  display: flex;
+  width: 100%;
+}
+#donation .donations-next {
+  display: flex;
+}
+#donation .donations-next p {
+  text-align: right;
+  padding: 5px;
+  margin-top: auto;
+  color: #000;
+  text-align: center;
+  font-family: "Inter";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#donation .donations-title {
+  color: #000;
+  font-family: "Roboto";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  width: 80%;
+}
+
+#donation {
+  text-align: left;
+  padding-top: 46px;
+}
+#donation .page-title {
+  display: flex;
+  width: 100%;
+}
+#donation .donation-next {
+  display: flex;
+}
+#donation .donation-next p {
+  text-align: right;
+  padding: 5px;
+  margin-top: auto;
+  color: #000;
+  text-align: center;
+  font-family: "Inter";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#donation .donation-title {
+  color: #000;
+  font-family: "Roboto";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  width: 80%;
+}
+
+#donation .donation-smallcontainer {
+  padding: 15px;
+}
+
+#donation .mainstage-button {
+  border-radius: 10px;
+  width: 97%;
+  border: 1px solid #cfcfcf;
+  background: #f9f3e9;
+}
+
+#donation .mainstage-button p {
+  color: #000;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#Add-Product label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#Add-Product textarea {
+  width: 97%;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+#Add-Product .input-password {
+  border-radius: 7px;
+  height: 45px;
+  width: 102%;
+}
+
+#Add-Product .add-images-component {
+  width: 62%;
+  height: 80px;
+  flex-shrink: 0;
+  border: 0.5px solid #9a9a9a;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Add-Product .add-images-component label {
+  width: 102px;
+  height: 40px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  border: 1px solid #d7dbec;
+  background: #fff;
+  color: #1e5eff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.image-container {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-container button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#donation input,
+#donation textarea {
+  width: 60%;
+  margin: 15px 0 30px 0;
+}
+
+.add-images-component {
+  width: 62%;
+  height: 80px;
+  flex-shrink: 0;
+  border: 0.5px solid #9a9a9a;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}

@@ -1,142 +1,67 @@
 import React, { useEffect, useState, } from 'react';
 import './index.css';
-import { HeadTitle,
-  SelectItemBox,
-  TextAreaInput,
-  TextInput,
-  Title, } from '~/components';
-import DateTimeInput from '~/components/DateTimeInput';
-import moment from 'moment';
-import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
-import { faAngleLeft,
-  faArrowUpFromBracket, } from '@fortawesome/free-solid-svg-icons';
+import { HeadTitle, Title, } from '~/components';
+
+import { Pagination, } from '~/components';
+import { AddEvent, } from './components';
+import EventContainer from './components/EventContainer';
 
 export default function Donation() {
-  const [name, setName,] = useState('');
-  const [productTypes, setProductTypes,] = useState([]);
-  const [description, setDescription,] = useState('');
-  const [startTime, setStartTime,] = useState('');
-  const [endTime, setEndTime,] = useState('');
-
-  useEffect(() => {
-    getProductTypes();
-  }, []);
-
-  const getProductTypes = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-      method: 'GET',
-    })
-      .then((res) =>
-        res.status === 200 ? res.json() : Promise.reject(res.json())
-      )
-      .then((data) => {
-        setProductTypes(data?.data);
-      })
-      .catch((err) => alert(err?.err));
+  const [mainstage, setMainStage,] = useState(true);
+  const [stageAdd, setStageAdd,] = useState(false);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
+  const [events, setEvent,] = useState([]);
+  const openAddEvent = () => {
+    setStageAdd(true);
+    setMainStage(false);
   };
-
-  const addEvent = (e) => {
-    e.preventDefault();
-    let selectedItems = document.querySelectorAll('.select-item-box.selected');
-    selectedItems = Array.from(selectedItems).map((item) => {
-      return `<li>${item.textContent}</li>`;
-    });
-    selectedItems = selectedItems.join('');
-    const newDescription=description+'\nDanh mục sản phẩm kêu gọi: ' +
-    `<ul>${selectedItems}</ul>`;
-    console.log(newDescription);
-    const form = new FormData();
-    form.append('name', name);
-    form.append('description', newDescription);
-    form.append('beginAt', changeTime(startTime));
-    form.append('endAt', changeTime(endTime));
-    fetch(`${process.env.REACT_APP_HOST_IP}/events/`, {
-      method: 'POST',
+  useEffect(() => {
+    getProducts();
+  }, [currentPage,]);
+  const getProducts = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/events/?page=${currentPage}`, {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
         Accept: 'application/json',
       },
-      body: form,
     })
       .then((res) => res.json())
-      .catch((error) => alert(error));
+      .then((data) => {
+        setEvent(data?.data);
+        setTotalPage(data?.meta?.total_pages);
+      })
+      .catch((error) => console.log(error));
   };
-
-  function changeTime(time) {
-    const parsedDatetime = moment(time, 'YYYY-MM-T HH:mm:ss'); // Parse with iOS format
-    const postgresDatetime = parsedDatetime.format('YYYY-MM-DD HH:mm:ss'); // Format for PostgreSQL
-    return postgresDatetime;
-  }
   return (
     <div id={'donation'}>
-      <div className={'donationpage-title'}>
-        <div className={'donations-title'}>
-          <HeadTitle>
-            <FontAwesomeIcon
-              style={{
-                paddingRight: '10px',
-              }}
-              icon={faAngleLeft}
-            ></FontAwesomeIcon>
-          </HeadTitle>
-          <HeadTitle>Đăng bán sản phẩm</HeadTitle>
-        </div>
-        <div className={'donations-next'} onClick={addEvent}>
-          <p>Đăng tải sự kiện</p>
-          <p>
-            <FontAwesomeIcon icon={faArrowUpFromBracket}></FontAwesomeIcon>
-          </p>
-        </div>
-      </div>
-      <div>
+      {mainstage && (
         <div>
-          <Title>Tên sự kiện</Title>
+          <HeadTitle>Tạo quyên góp</HeadTitle>
+          <div className={'mainstage-button'} onClick={openAddEvent}>
+            <p>Thêm sự kiện quyên Góp</p>
+          </div>
+          <div className={'donation-smallcontainer'}>
+            <div>
+              <Title>Danh sách sản phẩm</Title>
+            </div>
+            <div>
+              {events.map((event) => (
+                <EventContainer key={event?.id} event={event}/>
+              ))}
+            </div>
+            <Pagination
+              totalPage={totalPage}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+            />
+          </div>
         </div>
-        <TextInput
-          setValue={setName}
-          placeholder={'Nhập tên sự kiện'}
-          value={name}
-        />
-      </div>
-      <div>
-        <div>
-          <Title>Thời gian bắt đầu</Title>
-        </div>
-
-        <DateTimeInput setValue={setStartTime} value={startTime} />
-      </div>
-      <div>
-        <div>
-          <Title>Thời gian kết thúc</Title>
-        </div>
-        <DateTimeInput setValue={setEndTime} value={endTime} />
-      </div>
-      <div>
-        <div>
-          <Title>Mô tả sự kiện</Title>
-        </div>
-
-        <TextAreaInput
-          setValue={setDescription}
-          placeholder={'Mô tả sự kiện'}
-          rowNumber={3}
-          value={description}
-        />
-      </div>
-      <div>
-        <div>
-          <Title>Danh mục sản phẩm cần kêu gọi</Title>
-        </div>
-        <div>
-          {productTypes.map((item) => {
-            return <SelectItemBox key={item?.id}>{item?.name}</SelectItemBox>;
-          })}
-        </div>
-      </div>
+      )}
+      {stageAdd && (
+        <AddEvent stageAdd = {stageAdd} setStageAdd={setStageAdd} setMainStage={setMainStage}/>
+      )}
     </div>
   );
 }
