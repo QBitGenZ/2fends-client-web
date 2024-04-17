@@ -1,0 +1,11 @@
+#pagination{
+    margin: auto;
+}
+.pagination{
+    margin: auto;
+    display: flex;
+}
+
+#pagination ul{
+    list-style: none;
+}

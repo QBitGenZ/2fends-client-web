@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react';
-import { HeadTitle, Title, } from '~/components';
+import { HeadTitle, Pagination, Title, } from '~/components';
 import './index.css';
 import { ProductContainer, SaleStage1, SaleStage2, } from './components';
 export default function Sales() {
@@ -7,7 +7,9 @@ export default function Sales() {
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
   const [products, setProduct,] = useState([]);
-  const [newProduct, setNewProduct, ] = useState(null);
+  const [newProduct, setNewProduct,] = useState(null);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
@@ -16,7 +18,7 @@ export default function Sales() {
     getProducts();
   }, []);
   const getProducts = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/events/`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -25,7 +27,8 @@ export default function Sales() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data.data);
+        setProduct(data?.data);
+        setTotalPage(data?.meta?.total_pages);
       })
       .catch((error) => console.log(error));
   };
@@ -43,9 +46,14 @@ export default function Sales() {
             </div>
             <div>
               {products.map((product) => (
-                <ProductContainer key='product?.id' product={product} />
+                <ProductContainer key={product?.id} product={product} />
               ))}
             </div>
+            <Pagination
+              totalPage={totalPage}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+            ></Pagination>
           </div>
         </div>
       )}
