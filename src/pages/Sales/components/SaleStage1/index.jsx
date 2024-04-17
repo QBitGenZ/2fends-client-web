@@ -38,9 +38,9 @@ export default function SaleStage1({
     setMainStage(true);
   };
   const addInnformation = () => {
-    const gender = document.querySelector('.gender>.select-item-box.selected').textContent;
-    const product_type=document.querySelector('.product-type>.select-item-box.selected').getAttribute('id');
-    const product_size=document.querySelector('.product-size>.select-item-box.selected').textContent;
+    const gender = document.querySelector('.gender>.select-item-box.selected')?.textContent;
+    const product_type=document.querySelector('.product-type>.select-item-box.selected')?.getAttribute('id');
+    const product_size=document.querySelector('.product-size>.select-item-box.selected')?.textContent;
     setNewProduct({
       gender:gender,
       product_type:product_type,

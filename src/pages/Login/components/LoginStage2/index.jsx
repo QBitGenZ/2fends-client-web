@@ -15,8 +15,8 @@ export default function Logins2({ setIsLoggedIn, }) {
     };
     document.addEventListener('keydown', keyDownHandler);
   }, []);
-  function logine() {
-    event.preventDefault();
+  function logine(e) {
+    e.preventDefault();
     const form = new FormData();
     form.append('username', username);
     form.append('password', password);
