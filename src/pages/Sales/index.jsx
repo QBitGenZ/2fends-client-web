@@ -43,7 +43,7 @@ export default function Sales() {
             </div>
             <div>
               {products.map((product) => (
-                <ProductContainer key='product?.id' product={product} />
+                <ProductContainer key={product?.id} product={product} />
               ))}
             </div>
           </div>
