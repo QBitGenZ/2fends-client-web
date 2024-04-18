@@ -1,7 +1,10 @@
 import React, { useState, useEffect, } from 'react';
 import { HeadTitle, Pagination, Title, } from '~/components';
 import './index.css';
-import { ProductContainer, SaleStage1, SaleStage2, } from './components';
+import { ProductContainer,
+  ProductDetail,
+  SaleStage1,
+  SaleStage2, } from './components';
 export default function Sales() {
   const [mainstage, setMainStage,] = useState(true);
   const [stage1, setStage1,] = useState(false);
@@ -32,6 +35,12 @@ export default function Sales() {
       })
       .catch((error) => console.log(error));
   };
+  const [detailStage, setDetailStage,] = useState(false);
+  const [detailProduct, setDetailProduct,] = useState(false);
+  const openDetail = () => {
+    setDetailStage(true);
+    setMainStage(false);
+  };
   return (
     <>
       {mainstage && (
@@ -46,7 +55,7 @@ export default function Sales() {
             </div>
             <div>
               {products.map((product) => (
-                <ProductContainer key={product?.id} product={product} />
+                <ProductContainer onChange={openDetail} setDetailItem={setDetailProduct} key={product?.id} product={product} />
               ))}
             </div>
             <Pagination
@@ -72,9 +81,11 @@ export default function Sales() {
           setStage2={setStage2}
           setStage1={setStage1}
           newProduct={newProduct}
-          setNewProduct={setNewProduct}
+          setMainStage={setMainStage}
+          getProducts={getProducts}
         />
       )}
+      {detailStage && <ProductDetail product={detailProduct} detailStage={detailStage} setDetailStage={setDetailStage} setMainStage={setMainStage} />}
     </>
   );
 }

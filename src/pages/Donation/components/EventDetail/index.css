@@ -1,0 +1,68 @@
+#detailItem {
+  width: 100%;
+  display: flex;
+}
+
+#detailItem .detail-image {
+  width: 35%;
+}
+#detailItem .detail-info {
+  padding-left: 2%;
+  width: 65%;
+}
+
+#detailItem .item-image {
+  width: 100%;
+  justify-content: center;
+}
+
+#detailItem .detail-info > .product-name {
+  color: #000;
+  font-family: "Inter";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#detailItem .detail-info > .product-gender {
+  color: #5a5a5a;
+  font-family: "Inter";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+#detailItem .detail-info > div {
+  padding: 1% 0px;
+}
+
+#detailItem .detail-info > .product-price {
+  color: #000;
+  font-family: "Inter";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#detailItem .detail-info > .product-description {
+    padding-top: 5%;
+  color: #000;
+  font-family: "Inter";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#detailItem .detail-info > .product-descripcon {
+    padding-top: 0%;
+  color: #000;
+  font-family: 'Inter';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 60%;
+}

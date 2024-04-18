@@ -1,3 +1,6 @@
 import AddEvent from './AddEvent';
 import EventContainer from './EventContainer';
-export { AddEvent, EventContainer, };
+import EventDetail from './EventDetail';
+export {
+  AddEvent, EventContainer, EventDetail, 
+};

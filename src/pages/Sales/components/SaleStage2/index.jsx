@@ -10,6 +10,8 @@ export default function SaleStage2({
   setStage2,
   setStage1,
   newProduct,
+  getProducts,
+  setMainStage,
 }) {
   const [proName, setProName,] = useState();
   const [proPrice, setProPrice,] = useState();
@@ -18,6 +20,11 @@ export default function SaleStage2({
   const backStage1 = () => {
     setStage2(false);
     setStage1(true);
+  };
+  const backMainStage = () => {
+    getProducts();
+    setMainStage(true);
+    setStage2(false);
   };
 
   const [imageFiles, setImageFiles,] = useState([]);
@@ -71,6 +78,7 @@ export default function SaleStage2({
         console.log(data.data.id);
         addImage(data.data.id);
       })
+      .then(()=>(backMainStage()))
       .catch((error) => console.log(error));
 
   };
@@ -169,4 +177,6 @@ SaleStage2.propTypes = {
   setStage1: PropTypes.func,
   newProduct: PropTypes.object,
   setNewProduct: PropTypes.func,
+  setMainStage: PropTypes.func,
+  getProducts: PropTypes.func,
 };
