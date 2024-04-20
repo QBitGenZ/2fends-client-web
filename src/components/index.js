@@ -6,7 +6,8 @@ import Sidebar from './Sidebar';
 import TextAreaInput from './TextAreaInput';
 import DateTimeInpit from './DateTimeInput';
 import HeadTitle from './HeadTitle';
+import Pagination from './Pagination';
 
 export {
-  Title, SelectItemBox, SelectItemIconBox, TextInput, Sidebar,TextAreaInput, DateTimeInpit, HeadTitle,
+  Title, SelectItemBox, SelectItemIconBox, TextInput, Sidebar,TextAreaInput, DateTimeInpit, HeadTitle, Pagination,
 };

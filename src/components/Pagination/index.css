@@ -1,0 +1,23 @@
+#pagination {
+  margin: auto;
+  display: flex;
+}
+.pagination {
+  margin: auto;
+  display: flex;
+}
+
+#pagination ul {
+  list-style: none;
+}
+
+#pagination button {
+  border: none;
+  background-color: white;
+  margin: 5px;
+}
+
+#pagination button:hover {
+  -webkit-transform: scale(1.5);
+  z-index: auto;
+}

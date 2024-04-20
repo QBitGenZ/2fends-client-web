@@ -1,13 +1,18 @@
 import React, { useState, useEffect, } from 'react';
-import { HeadTitle, Title, } from '~/components';
+import { HeadTitle, Pagination, Title, } from '~/components';
 import './index.css';
-import { ProductContainer, SaleStage1, SaleStage2, } from './components';
+import { ProductContainer,
+  ProductDetail,
+  SaleStage1,
+  SaleStage2, } from './components';
 export default function Sales() {
   const [mainstage, setMainStage,] = useState(true);
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
   const [products, setProduct,] = useState([]);
-  const [newProduct, setNewProduct, ] = useState(null);
+  const [newProduct, setNewProduct,] = useState(null);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
@@ -25,9 +30,16 @@ export default function Sales() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data.data);
+        setProduct(data?.data);
+        setTotalPage(data?.meta?.total_pages);
       })
       .catch((error) => console.log(error));
+  };
+  const [detailStage, setDetailStage,] = useState(false);
+  const [detailProduct, setDetailProduct,] = useState(false);
+  const openDetail = () => {
+    setDetailStage(true);
+    setMainStage(false);
   };
   return (
     <>
@@ -43,9 +55,14 @@ export default function Sales() {
             </div>
             <div>
               {products.map((product) => (
-                <ProductContainer key={product?.id} product={product} />
+                <ProductContainer onChange={openDetail} setDetailItem={setDetailProduct} key={product?.id} product={product} />
               ))}
             </div>
+            <Pagination
+              totalPage={totalPage}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+            />
           </div>
         </div>
       )}
@@ -64,9 +81,11 @@ export default function Sales() {
           setStage2={setStage2}
           setStage1={setStage1}
           newProduct={newProduct}
-          setNewProduct={setNewProduct}
+          setMainStage={setMainStage}
+          getProducts={getProducts}
         />
       )}
+      {detailStage && <ProductDetail product={detailProduct} detailStage={detailStage} setDetailStage={setDetailStage} setMainStage={setMainStage} />}
     </>
   );
 }
