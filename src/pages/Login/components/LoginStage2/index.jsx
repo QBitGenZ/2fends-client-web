@@ -5,16 +5,6 @@ export default function Logins2({ setIsLoggedIn, }) {
   const navigation = useNavigate();
   const [username, setUsername,] = useState('');
   const [password, setPassword,] = useState('');
-  // useEffect(() => {
-  //   const keyDownHandler = event => {
-  //     console.log('User pressed: ', event.key);
-
-  //     if (event.key === 'Enter') {
-  //       logine();
-  //     }
-  //   };
-  //   document.addEventListener('keydown', keyDownHandler);
-  // }, []);
   const logine = () => {
     const form = new FormData();
     form.append('username', username);
@@ -34,6 +24,9 @@ export default function Logins2({ setIsLoggedIn, }) {
       })
       .then((data) => {
         localStorage.setItem('access', data?.access);
+        if(data?.status === 'Chưa xác minh' && data?.is_philanthropist===true){
+          return Promise.reject('Tài khoản chưa được xác minh');
+        }
         navigation('/');
         setIsLoggedIn(true);
       })

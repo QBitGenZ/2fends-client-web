@@ -9,13 +9,13 @@ export default function EventDetail({
   detailStage,
   setDetailStage,
   setMainStage,
-  product,
+  event,
 }) {
   const backMainStage = () => {
     setDetailStage(false);
     setMainStage(true);
   };
-  console.log(product);
+  console.log(event);
   return (
     <>
       {detailStage && (
@@ -38,20 +38,20 @@ export default function EventDetail({
               <div className={'item-image'}>
                 <img
                   className={'item-image'}
-                  src={`${process.env.REACT_APP_IMAGE_HOST_IP}${product?.image}`}
+                  src={`${process.env.REACT_APP_IMAGE_HOST_IP}${event?.image}`}
                 />
               </div>
             </div>
             <div className={'detail-info'}>
-              <div className={'product-name'}>{product?.name}</div>
-              <div className={'product-gender'}>{product?.user}</div>
+              <div className={'product-name'}>{event?.name}</div>
+              <div className={'product-gender'}>{event?.user}</div>
               <div className={'product-price'}>
-                {moment(product?.beginAt).format('HH:mm DD/MM/YYYY')} -{' '}
-                {moment(product?.endAt).format('HH:mm DD/MM/YYYY')}
+                {moment(event?.beginAt).format('HH:mm DD/MM/YYYY')} -{' '}
+                {moment(event?.endAt).format('HH:mm DD/MM/YYYY')}
               </div>
               <div className={'product-description'}> Mô tả sự kiện</div>
               <div className={'product-descripcon'}>
-                {product?.description} Hoa tay ZARA phiên bản mạ vàng sản xuất
+                {event?.description} Hoa tay ZARA phiên bản mạ vàng sản xuất
                 2022. Sản phẩm chỉ mới sử dụng 2 lần nên còn rất mới, độ mới
                 khoảng 95%. Nếu có thắc mắc hãy liên hệ trực tiếp tôi. Tôi còn
                 rất nhiều sản phẩm tốt, hãy xem gian hàng của tôi.
@@ -68,5 +68,5 @@ EventDetail.propTypes = {
   detailStage: PropTypes.bool,
   setDetailStage: PropTypes.func,
   setMainStage: PropTypes.func,
-  product: PropTypes.object,
+  event: PropTypes.object,
 };

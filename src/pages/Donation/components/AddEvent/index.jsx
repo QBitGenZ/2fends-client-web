@@ -11,7 +11,7 @@ import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleLeft,
   faArrowUpFromBracket,
   faClose, } from '@fortawesome/free-solid-svg-icons';
-export default function AddEvent({ stageAdd, setStageAdd, setMainStage, }) {
+export default function AddEvent({ getEvents, stageAdd, setStageAdd, setMainStage, }) {
   const [name, setName,] = useState('');
   const [productTypes, setProductTypes,] = useState([]);
   const [description, setDescription,] = useState('');
@@ -43,15 +43,15 @@ export default function AddEvent({ stageAdd, setStageAdd, setMainStage, }) {
     e.preventDefault();
     let selectedItems = document.querySelectorAll('.select-item-box.selected');
     selectedItems = Array.from(selectedItems).map((item) => {
-      return `<li>${item.textContent}</li>`;
+      return `${item.textContent}`;
     });
-    selectedItems = selectedItems.join('');
+    selectedItems = selectedItems.join(',');
     const newDescription =
       description +
-      '\nDanh mục sản phẩm kêu gọi: ' +
-      `<ul>${selectedItems}</ul>`;
-    console.log(newDescription);
-    console.log(imageFiles);
+      '\n.Danh mục sản phẩm kêu gọi: ' +
+      `${selectedItems}.`;
+    console.log(startTime,endTime);
+    console.log(changeTime(startTime),changeTime(endTime));
     const form = new FormData();
     form.append('name', name);
     form.append('description', newDescription);
@@ -66,7 +66,14 @@ export default function AddEvent({ stageAdd, setStageAdd, setMainStage, }) {
       },
       body: form,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if(res.status===401){
+          return Promise.reject('Bạn không phải nhà từ thiện');
+        }else if(res.status===201){
+          getEvents();
+          backMainStage();
+        }
+      })
       .catch((error) => alert(error));
   };
   const backMainStage = () => {
@@ -87,7 +94,7 @@ export default function AddEvent({ stageAdd, setStageAdd, setMainStage, }) {
     setImageFiles(updatedImages);
   };
   function changeTime(time) {
-    const parsedDatetime = moment(time, 'YYYY-MM-T HH:mm:ss'); // Parse with iOS format
+    const parsedDatetime = moment(time, 'YYYY-MM-DDTHH:mm'); // Parse with iOS format
     const postgresDatetime = parsedDatetime.format('YYYY-MM-DD HH:mm:ss'); // Format for PostgreSQL
     return postgresDatetime;
   }
@@ -195,6 +202,7 @@ export default function AddEvent({ stageAdd, setStageAdd, setMainStage, }) {
 }
 
 AddEvent.propTypes = {
+  getEvents: PropTypes.func,
   stageAdd: PropTypes.boolean,
   setStageAdd: PropTypes.func,
   setMainStage: PropTypes.func,

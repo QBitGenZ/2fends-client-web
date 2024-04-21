@@ -1,6 +1,7 @@
 #detailItem {
   width: 100%;
   display: flex;
+  background-color: #F0ECE5;
 }
 
 #detailItem .detail-image {

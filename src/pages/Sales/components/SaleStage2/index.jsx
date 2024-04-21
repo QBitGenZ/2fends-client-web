@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, } from 'react';
-import { HeadTitle, TextAreaInput, TextInput, Title, } from '~/components';
+import { HeadTitle, TextAreaInput, TextInput, Title, Selection, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight,
   faAngleLeft,
@@ -17,6 +17,7 @@ export default function SaleStage2({
   const [proPrice, setProPrice,] = useState();
   const [proQuantity, setQuantity,] = useState();
   const [proDescription, setProDescription,] = useState();
+  const [degree, setDegree,] = useState('Mới');
   const backStage1 = () => {
     setStage2(false);
     setStage1(true);
@@ -64,7 +65,9 @@ export default function SaleStage2({
     form.append('product_type',newProduct.product_type);
     form.append('size',newProduct.size);
     form.append('description',proDescription);
+    form.append('degree',degree);
     form.append('quantity',1);
+    form.append('gender',newProduct.gender);
     console.log(newProduct);
     fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
       method: 'POST',
@@ -123,6 +126,25 @@ export default function SaleStage2({
                 <Title>Số lượng sản phẩm</Title>
               </div>
               <TextInput value={proQuantity} setValue={setQuantity} placeholder={'Nhập giá sản phẩm'} />
+            </div>
+            <div>
+              <div>
+                <Title>Tình trạng sản phẩm</Title>
+              </div>
+              <Selection value={degree} setValue={setDegree} options={[
+                {
+                  value:'Mới',
+                  label:'Mới',
+                },
+                {
+                  value:'Vừa',
+                  label:'Vừa',
+                },
+                {
+                  value:'Cũ',
+                  label:'Cũ',
+                },
+              ]} />
             </div>
             {/* TODO: Thay đỏi này thành component có sẵn. Tạo useState cho nó và css để có khoảng cách */}
             <div>

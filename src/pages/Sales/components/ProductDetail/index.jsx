@@ -42,8 +42,8 @@ export default function ProductDetail({
               <div className={'item-image'}>
                 <img
                   className={'item-image'}
-                  src={`${process.env.REACT_APP_IMAGE_HOST_IP}${product.product_image[currentImageIndex].src}`}
-                  alt={product.product_image[currentImageIndex].alt}
+                  src={`${process.env.REACT_APP_IMAGE_HOST_IP}${product?.product_image[currentImageIndex]?.src}`}
+                  alt={product?.product_image[currentImageIndex]?.alt}
                 />
                 <div className='dot-navigation'>
                   {product.product_image.map((image, index) => (
@@ -64,7 +64,7 @@ export default function ProductDetail({
               </div>
               <div className={'product-description'}> Mô tả sản phẩm</div>
               <div className={'product-descripcon'}>
-                {product?.description} Hoa tay ZARA phiên bản mạ vàng sản xuất
+                {product?.description}Hoa tay ZARA phiên bản mạ vàng sản xuất
                 2022. Sản phẩm chỉ mới sử dụng 2 lần nên còn rất mới, độ mới
                 khoảng 95%. Nếu có thắc mắc hãy liên hệ trực tiếp tôi. Tôi còn
                 rất nhiều sản phẩm tốt, hãy xem gian hàng của tôi.

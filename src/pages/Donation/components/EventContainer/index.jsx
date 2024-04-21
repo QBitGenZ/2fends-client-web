@@ -6,6 +6,12 @@ export default function EventContainer({ event, openDetail, setDetailEvent, }) {
     setDetailEvent(event);
     openDetail();
   };
+  const displayDescription = (description) => {
+    if (description.length > 36) {
+      return description.substring(0,30) + '...';
+    }
+    return description;
+  };
   console.log(event?.image);
   return (
     <div className='product-card' onClick={changeToEventDetail}>
@@ -15,7 +21,7 @@ export default function EventContainer({ event, openDetail, setDetailEvent, }) {
       />
       <div className='product-info'>
         <p className='product-title'>{event?.name}</p>
-        <p className='product-price'>{event?.description} vnd</p>
+        <p className='product-price'>{displayDescription(event?.description)}</p>
       </div>
     </div>
   );
@@ -25,5 +31,4 @@ EventContainer.propTypes = {
   event: PropTypes.object,
   openDetail: PropTypes.func,
   setDetailEvent: PropTypes.func,
-
 };
