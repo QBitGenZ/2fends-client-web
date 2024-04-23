@@ -72,9 +72,9 @@ export default function ProductDetail({
                   alt={product?.product_image[currentImageIndex]?.alt}
                 />
                 <div className='dot-navigation'>
-                  {product.product_image.map((image, index) => (
+                  {product?.product_image?.map((image, index) => (
                     <button
-                      key={image.src}
+                      key={image?.src}
                       className={index === currentImageIndex ? 'active' : ''}
                       onClick={() => goToSlide(index)}
                     />

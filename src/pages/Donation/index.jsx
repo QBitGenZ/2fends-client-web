@@ -1,9 +1,9 @@
 import React, { useEffect, useState, } from 'react';
 import './index.css';
-import { HeadTitle, Title, } from '~/components';
+import { HeadTitle, Title, TextInput, } from '~/components';
 
 import { Pagination, } from '~/components';
-import { AddEvent, EventDetail, } from './components';
+import { AddEvent, EventDetail, UpdateEvent, } from './components';
 import EventContainer from './components/EventContainer';
 
 export default function Donation() {
@@ -12,13 +12,20 @@ export default function Donation() {
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
   const [events, setEvent,] = useState([]);
+  const [takedEvents, setTakedEvent,] = useState([]);
+  const [updateStage, setUpdateStage,] = useState(false);
+  const [search, setSearch,] = useState('');
   const openAddEvent = () => {
     setStageAdd(true);
     setMainStage(false);
   };
   useEffect(() => {
-    getEvents();
-  }, [currentPage,]);
+    if (search.length != 0) {
+      searchEvents();
+    } else {
+      getEvents();
+    }
+  }, [currentPage,search,]);
   const getEvents = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/events/my/?page=${currentPage}`, {
       method: 'GET',
@@ -27,6 +34,24 @@ export default function Donation() {
         Accept: 'application/json',
       },
     })
+      .then((res) => res.json())
+      .then((data) => {
+        setEvent(data?.data);
+        setTotalPage(data?.meta?.total_pages);
+      })
+      .catch((error) => console.log(error));
+  };
+  const searchEvents = () => {
+    fetch(
+      `${process.env.REACT_APP_HOST_IP}/events/my/search/?page=${currentPage}&keyword=${search}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          Accept: 'application/json',
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setEvent(data?.data);
@@ -52,6 +77,13 @@ export default function Donation() {
             <div className={'donation-smallcontainer'}>
               <div>
                 <Title>Danh sách sự kiện</Title>
+              </div>
+              <div>
+                <TextInput
+                  value={search}
+                  setValue={setSearch}
+                  placeholder={'Tìm kiếm sản phẩm...'}
+                />
               </div>
               <div>
                 {events.map((event) => (
@@ -85,6 +117,18 @@ export default function Donation() {
             setDetailStage={setDetailStage}
             detailStage={detailStage}
             setMainStage={setMainStage}
+            getEvents={getEvents}
+            setUpdateStage={setUpdateStage}
+            setTakedEvent={setTakedEvent}
+          />
+        )}
+        {updateStage && (
+          <UpdateEvent
+            event={takedEvents}
+            setUpdateStage={setUpdateStage}
+            updateStage={updateStage}
+            setDetailStage={setDetailStage}
+            getEvents={getEvents}
           />
         )}
       </div>

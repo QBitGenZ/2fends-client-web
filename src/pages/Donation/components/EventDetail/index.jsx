@@ -10,12 +10,37 @@ export default function EventDetail({
   setDetailStage,
   setMainStage,
   event,
+  getEvents,
+  setUpdateStage,
+  setTakedEvent,
 }) {
   const backMainStage = () => {
     setDetailStage(false);
     setMainStage(true);
   };
   console.log(event);
+  const changetoUpdate = ()=>{
+    setTakedEvent(event);
+    setUpdateStage(true);
+    setDetailStage(false);
+  };
+  const deleteEvent = ()=>{
+    fetch(`${process.env.REACT_APP_HOST_IP}/events/${event?.id}/`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status === 204) {
+          alert('Xóa sự kiện thành công');
+          getEvents();
+          backMainStage();
+        }
+      })
+      .catch((error) => alert(error));
+  };
   return (
     <>
       {detailStage && (
@@ -56,6 +81,14 @@ export default function EventDetail({
                   __html: event?.description,
                 }}
               />
+              <div className={'info-button-container'}>
+                <button className={'info-button'} onClick={changetoUpdate}>
+                  Chỉnh sửa
+                </button>
+                <button className={'info-button'} onClick={deleteEvent}>
+                  Xóa
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -69,4 +102,7 @@ EventDetail.propTypes = {
   setDetailStage: PropTypes.func,
   setMainStage: PropTypes.func,
   event: PropTypes.object,
+  getEvents: PropTypes.func,
+  setUpdateStage: PropTypes.func,
+  setTakedEvent: PropTypes.func,
 };

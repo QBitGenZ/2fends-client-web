@@ -144,9 +144,9 @@ export default function Sales() {
         <UpdateProduct
           updateStage={updateStage}
           setUpdateStage={setUpdateStage}
-          setMainStage={setMainStage}
+          setDetailStage={setDetailStage}
           product={takedProduct}
-          types={types}
+          getProducts={getProducts}
         />
       )}
     </>

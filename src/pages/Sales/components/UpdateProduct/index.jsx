@@ -6,25 +6,29 @@ import { HeadTitle,
   Title,
   Selection, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, } from '@fortawesome/free-solid-svg-icons';
 export default function UpdateProduct({
   product,
   updateStage,
   setUpdateStage,
-  setMainStage,
+  setDetailStage,
+  getProducts,
 }) {
   const [proName, setProName,] = useState(product?.name);
-  const [proType, setProType,] = useState(product?.name);
+  const [proType, setProType,] = useState([]);
+  const [type, setType,] = useState(product?.product_type);
   const [proPrice, setProPrice,] = useState(product?.price);
   const [proQuantity, setQuantity,] = useState(product?.quantity);
   const [proDescription, setProDescription,] = useState(product?.description);
   const [degree, setDegree,] = useState(product?.degree);
   const [proSize, setProSize,] = useState(product?.size);
+  const [proUser, setProUser,] = useState(product?.size);
   useEffect(() => {
     getTypes();
+    getUser();
   }, []);
   const backDetail = () => {
-    setMainStage(true);
+    setDetailStage(true);
     setUpdateStage(false);
   };
   console.log(updateStage);
@@ -40,7 +44,20 @@ export default function UpdateProduct({
   //     updatedImages.splice(index, 1);
   //     setImageFiles(updatedImages);
   //   };
-
+  const getUser = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/info`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProUser(data?.data?.username);
+      })
+      .catch((error) => console.log(error));
+  };
   const getTypes = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/products/types/`, {
       method: 'GET',
@@ -55,7 +72,45 @@ export default function UpdateProduct({
       })
       .catch((error) => console.log(error));
   };
-  console.log('fjfjjjj', proType);
+  const updateProduct = () => {
+    const form = new FormData();
+    form.append('name', proName);
+    form.append('description', proDescription);
+    form.append('price', Number(proPrice));
+    form.append('quantity', Number(proQuantity));
+    form.append('degree', degree);
+    form.append('size', proSize);
+    form.append('product_type', type);
+    form.append('user', proUser);
+    fetch(`${process.env.REACT_APP_HOST_IP}/products/${product?.id}/`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+      body: form,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          alert('Cập nhật sản phẩm thành công');
+          getProducts();
+          backDetail();
+        } else {
+          return Promise.reject('Chỉnh sửa sản phẩm không thành công');
+        }
+      })
+      .catch((error) => alert(error));
+  };
+  const typeofproduct = () => {
+    let array = [];
+    proType?.map((type) =>
+      array.push({
+        label: type?.name,
+        value: type?.id,
+      })
+    );
+    return array;
+  };
   return (
     <>
       {updateStage && (
@@ -71,6 +126,12 @@ export default function UpdateProduct({
                 ></FontAwesomeIcon>
               </HeadTitle>
               <HeadTitle>Chỉnh sửa sản phẩm</HeadTitle>
+            </div>
+            <div className={'sales-next'} onClick={updateProduct}>
+              <p>Chỉnh sửa</p>
+              <p>
+                <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
+              </p>
             </div>
           </div>
           <div id={'Add-Product'}>
@@ -167,9 +228,9 @@ export default function UpdateProduct({
                 <Title> Loại sản phẩm</Title>
               </div>
               <Selection
-                value={proSize}
-                setValue={setProSize}
-                // options={}
+                value={type}
+                setValue={setType}
+                options={typeofproduct()}
               />
             </div>
             {/* TODO: Thay đỏi này thành component có sẵn. Tạo useState cho nó và css để có khoảng cách */}
@@ -217,12 +278,6 @@ export default function UpdateProduct({
                 </div>
               ))}
             </div> */}
-            <div className={'info-button-container'}>
-              <button className={'info-button'}>Chỉnh sửa</button>
-              <button className={'info-button'} onClick={backDetail}>
-                Xóa
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -232,8 +287,8 @@ export default function UpdateProduct({
 
 UpdateProduct.propTypes = {
   product: PropTypes.object,
-  setMainStage: PropTypes.func,
+  setDetailStage: PropTypes.func,
   setUpdateStage: PropTypes.func,
   updateStage: PropTypes.bool,
-  types: PropTypes.array,
+  getProducts: PropTypes.func,
 };

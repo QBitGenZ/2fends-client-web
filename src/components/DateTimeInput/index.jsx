@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
 
-export default function DateTimeInput ({ value, setValue, }) {
+export default function DateTimeInput({ value, setValue, }) {
   return (
     <input className={'date-time-input'} type={'datetime-local'} value={value}
       onChange={(e) => setValue(e.target.value)}/>
