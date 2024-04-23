@@ -1,0 +1,14 @@
+#revenue {
+  text-align: left;
+  padding-top: 46px;
+  padding-left: 40px;
+  background-color: #f0ece5;
+}
+
+#revenue .revenue-smallcontainer {
+  padding: 15px;
+}
+
+#revenue .revenue-chart {
+    text-align: center;
+  }

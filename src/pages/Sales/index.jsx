@@ -4,9 +4,13 @@ import './index.css';
 import { ProductContainer,
   ProductDetail,
   SaleStage1,
-  SaleStage2, } from './components';
+  SaleStage2,
+  UpdateProduct, } from './components';
 export default function Sales() {
   const [mainstage, setMainStage,] = useState(true);
+  const [types, setType,] = useState([]);
+  const [updateStage, setUpdateStage,] = useState(false);
+  const [takedProduct, setTakedProduct,] = useState(false);
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
   const [products, setProduct,] = useState([]);
@@ -19,20 +23,23 @@ export default function Sales() {
     setMainStage(false);
   };
   useEffect(() => {
-    if(search.length!=0){
+    if (search.length != 0) {
       searchProducts();
-    }else{
+    } else {
       getProducts();
     }
-  }, [currentPage,search,]);
+  }, [currentPage, search,]);
   const getProducts = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/myproducts/?page=${currentPage}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-    })
+    fetch(
+      `${process.env.REACT_APP_HOST_IP}/products/myproducts/?page=${currentPage}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          Accept: 'application/json',
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data?.data);
@@ -41,13 +48,16 @@ export default function Sales() {
       .catch((error) => console.log(error));
   };
   const searchProducts = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/myproducts/search/?page=${currentPage}&keyword=${search}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-    })
+    fetch(
+      `${process.env.REACT_APP_HOST_IP}/products/myproducts/search/?page=${currentPage}&keyword=${search}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          Accept: 'application/json',
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data?.data);
@@ -100,6 +110,8 @@ export default function Sales() {
       )}
       {stage1 && (
         <SaleStage1
+          types={types}
+          setType={setType}
           stage1={stage1}
           setMainStage={setMainStage}
           setStage1={setStage1}
@@ -123,6 +135,18 @@ export default function Sales() {
           detailStage={detailStage}
           setDetailStage={setDetailStage}
           setMainStage={setMainStage}
+          getProducts={getProducts}
+          setTakedProduct={setTakedProduct}
+          setUpdateStage={setUpdateStage}
+        />
+      )}
+      {updateStage && (
+        <UpdateProduct
+          updateStage={updateStage}
+          setUpdateStage={setUpdateStage}
+          setMainStage={setMainStage}
+          product={takedProduct}
+          types={types}
         />
       )}
     </>

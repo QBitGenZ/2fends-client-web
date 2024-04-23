@@ -50,12 +50,12 @@ export default function EventDetail({
                 {moment(event?.endAt).format('HH:mm DD/MM/YYYY')}
               </div>
               <div className={'product-description'}> Mô tả sự kiện</div>
-              <div className={'product-descripcon'}>
-                {event?.description} Hoa tay ZARA phiên bản mạ vàng sản xuất
-                2022. Sản phẩm chỉ mới sử dụng 2 lần nên còn rất mới, độ mới
-                khoảng 95%. Nếu có thắc mắc hãy liên hệ trực tiếp tôi. Tôi còn
-                rất nhiều sản phẩm tốt, hãy xem gian hàng của tôi.
-              </div>
+              <div
+                className={'product-descripcon'}
+                dangerouslySetInnerHTML={{
+                  __html: event?.description,
+                }}
+              />
             </div>
           </div>
         </div>

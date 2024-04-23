@@ -1,0 +1,116 @@
+#storedproducts {
+    text-align: left;
+    padding-top: 46px;
+    padding-left: 40px;
+  }
+.Product-Table {
+    padding-top: 30px;
+    height: auto;
+    margin: auto;
+  }
+  .User-Table {
+    padding-top: 30px;
+    height: auto;
+    margin: auto;
+  }
+  table {
+    margin: auto;
+    height: auto;
+    width: 90%;
+  }
+  
+  .prodtabletdth{
+    font-size: 20px;
+    padding: 7px 7px;
+  }
+  
+  .prodtabletd {
+    text-align: center;
+  }
+  
+  .prodtableth {
+    align-items: center;
+    text-align: center;
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .propdtabletr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .propdtabletr:hover {
+    background-color: #ddd;
+  }
+  
+  .approved {
+    width: 125px;
+    margin: auto;
+    color: #5dc6ba;
+    font-family: "Inter";
+    font-size: 20px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 10px;
+    background: #e0fbf8;
+  }
+  
+  .notapproved {
+    width: 125px;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    background: rgba(254, 255, 198, 0.77);
+    color: #e1e600;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .rejected {
+    width: 125px;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    background: rgba(254, 200, 188, 0.82);
+    color: #FE2F02;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .reported {
+    width: 125px;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    background: rgba(255, 227, 215, 0.79);
+    color: #FA9467;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #storedproducts .search{
+    height: auto;
+    margin: auto;
+  }
+  #storedproducts .products-smallcontainer{
+    display: flex;
+  }
+
+  #storedproducts .products-smallcontainer > .search{
+    display: flex;
+    width: 90%;
+  }
+  #storedproducts .products-smallcontainer > .search > .text-input{
+    width: 100%;
+  }

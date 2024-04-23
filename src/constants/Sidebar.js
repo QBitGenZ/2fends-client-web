@@ -1,5 +1,5 @@
 import { faGift, faSignOut, faStore, faUser, } from '@fortawesome/free-solid-svg-icons';
-import { Donation, Information, Sales, Login, } from '~/pages';
+import { Donation, Information, Sales, Login, Products, Revenue, } from '~/pages';
 
 const Sidebar = [
   {
@@ -19,6 +19,18 @@ const Sidebar = [
     icon: faStore,
     path: '/sales',
     page: Sales,
+  },
+  {
+    label: 'Sản phẩm tồn kho',
+    icon: faStore,
+    path: '/products',
+    page: Products,
+  },
+  {
+    label: 'Thống kê doanh thu',
+    icon: faStore,
+    path: '/revenue',
+    page: Revenue,
   },
   {
     label: 'Đăng xuất',
