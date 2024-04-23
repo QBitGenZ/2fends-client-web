@@ -5,6 +5,7 @@ import { HeadTitle, Title, TextInput, } from '~/components';
 import { Pagination, } from '~/components';
 import { AddEvent, EventDetail, UpdateEvent, } from './components';
 import EventContainer from './components/EventContainer';
+import { ProductDetail, } from './components';
 
 export default function Donation() {
   const [mainstage, setMainStage,] = useState(true);
@@ -15,6 +16,13 @@ export default function Donation() {
   const [takedEvents, setTakedEvent,] = useState([]);
   const [updateStage, setUpdateStage,] = useState(false);
   const [search, setSearch,] = useState('');
+  const [detailProduct, setDetailProduct,] = useState(false);
+  const [productDonate, setProductDonate,] = useState();
+  const [quantity, setQuantity,] = useState();
+  const changeToProductDetail = () => {
+    setDetailStage(false);
+    setDetailProduct(true);
+  };
   const openAddEvent = () => {
     setStageAdd(true);
     setMainStage(false);
@@ -25,7 +33,7 @@ export default function Donation() {
     } else {
       getEvents();
     }
-  }, [currentPage,search,]);
+  }, [currentPage, search,]);
   const getEvents = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/events/my/?page=${currentPage}`, {
       method: 'GET',
@@ -82,7 +90,7 @@ export default function Donation() {
                 <TextInput
                   value={search}
                   setValue={setSearch}
-                  placeholder={'Tìm kiếm sản phẩm...'}
+                  placeholder={'Tìm kiếm sự kiện...'}
                 />
               </div>
               <div>
@@ -120,6 +128,10 @@ export default function Donation() {
             getEvents={getEvents}
             setUpdateStage={setUpdateStage}
             setTakedEvent={setTakedEvent}
+            setProductDonate={setProductDonate}
+            productDonate={productDonate}
+            changeToProductDetail={changeToProductDetail}
+            setQuantity={setQuantity}
           />
         )}
         {updateStage && (
@@ -129,6 +141,15 @@ export default function Donation() {
             updateStage={updateStage}
             setDetailStage={setDetailStage}
             getEvents={getEvents}
+          />
+        )}
+        {detailProduct && (
+          <ProductDetail
+            product={productDonate}
+            detailStage={detailProduct}
+            setDetailStage={setDetailProduct}
+            setStoredStage={setDetailStage}
+            quantity={quantity}
           />
         )}
       </div>
