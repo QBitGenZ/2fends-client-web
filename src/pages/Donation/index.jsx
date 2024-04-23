@@ -17,10 +17,10 @@ export default function Donation() {
     setMainStage(false);
   };
   useEffect(() => {
-    getProducts();
+    getEvents();
   }, [currentPage,]);
-  const getProducts = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/events/?page=${currentPage}`, {
+  const getEvents = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/events/my/?page=${currentPage}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -47,11 +47,11 @@ export default function Donation() {
           <div>
             <HeadTitle>Tạo quyên góp</HeadTitle>
             <div className={'mainstage-button'} onClick={openAddEvent}>
-              <p>Thêm sự kiện quyên Góp</p>
+              <p>Thêm sự kiện quyên góp</p>
             </div>
             <div className={'donation-smallcontainer'}>
               <div>
-                <Title>Danh sách sản phẩm</Title>
+                <Title>Danh sách sự kiện</Title>
               </div>
               <div>
                 {events.map((event) => (
@@ -76,11 +76,12 @@ export default function Donation() {
             stageAdd={stageAdd}
             setStageAdd={setStageAdd}
             setMainStage={setMainStage}
+            getEvents={getEvents}
           />
         )}
         {detailStage && (
           <EventDetail
-            product={detailEvent}
+            event={detailEvent}
             setDetailStage={setDetailStage}
             detailStage={detailStage}
             setMainStage={setMainStage}

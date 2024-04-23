@@ -1,6 +1,7 @@
 #donation {
   text-align: left;
   padding-top: 46px;
+  padding-left: 40px;
 }
 #donation input,
 #donation textarea {
@@ -83,6 +84,7 @@
   width: 97%;
   border: 1px solid #cfcfcf;
   background: #f9f3e9;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 #donation .mainstage-button p {
@@ -191,4 +193,8 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
+}
+
+#donation .mainstage-button:hover {
+  cursor:pointer;
 }

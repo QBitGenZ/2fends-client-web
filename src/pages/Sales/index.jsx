@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react';
-import { HeadTitle, Pagination, Title, } from '~/components';
+import { HeadTitle, Pagination, TextInput, Title, } from '~/components';
 import './index.css';
 import { ProductContainer,
   ProductDetail,
@@ -10,6 +10,7 @@ export default function Sales() {
   const [stage1, setStage1,] = useState(false);
   const [stage2, setStage2,] = useState(false);
   const [products, setProduct,] = useState([]);
+  const [search, setSearch,] = useState('');
   const [newProduct, setNewProduct,] = useState(null);
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
@@ -18,10 +19,29 @@ export default function Sales() {
     setMainStage(false);
   };
   useEffect(() => {
-    getProducts();
-  }, []);
+    if(search.length!=0){
+      searchProducts();
+    }else{
+      getProducts();
+    }
+  }, [currentPage,search,]);
   const getProducts = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/products/myproducts/?page=${currentPage}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data?.data);
+        setTotalPage(data?.meta?.total_pages);
+      })
+      .catch((error) => console.log(error));
+  };
+  const searchProducts = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/products/myproducts/search/?page=${currentPage}&keyword=${search}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -54,8 +74,20 @@ export default function Sales() {
               <Title>Danh sách sản phẩm</Title>
             </div>
             <div>
+              <TextInput
+                value={search}
+                setValue={setSearch}
+                placeholder={'Tìm kiếm sản phẩm...'}
+              />
+            </div>
+            <div>
               {products.map((product) => (
-                <ProductContainer onChange={openDetail} setDetailItem={setDetailProduct} key={product?.id} product={product} />
+                <ProductContainer
+                  onChange={openDetail}
+                  setDetailItem={setDetailProduct}
+                  key={product?.id}
+                  product={product}
+                />
               ))}
             </div>
             <Pagination
@@ -85,7 +117,14 @@ export default function Sales() {
           getProducts={getProducts}
         />
       )}
-      {detailStage && <ProductDetail product={detailProduct} detailStage={detailStage} setDetailStage={setDetailStage} setMainStage={setMainStage} />}
+      {detailStage && (
+        <ProductDetail
+          product={detailProduct}
+          detailStage={detailStage}
+          setDetailStage={setDetailStage}
+          setMainStage={setMainStage}
+        />
+      )}
     </>
   );
 }
