@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, } from 'react';
+import React, { useEffect, } from 'react';
 import { HeadTitle, SelectItemBox, Title, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft, } from '@fortawesome/free-solid-svg-icons';
@@ -9,8 +9,10 @@ export default function SaleStage1({
   setStage2,
   setMainStage,
   setNewProduct,
+  types,
+  setType,
 }) {
-  const [types, setType,] = useState([]);
+  
   useEffect(() => {
     getTypes();
   }, []);
@@ -115,4 +117,6 @@ SaleStage1.propTypes = {
   setStage2: PropTypes.func,
   setMainStage: PropTypes.func,
   setNewProduct: PropTypes.func,
+  types: PropTypes.array,
+  setType: PropTypes.func,
 };

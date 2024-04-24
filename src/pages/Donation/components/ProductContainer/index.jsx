@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
-import { vndCurrency, } from '~/utils/format';
 
-export default function ProductContainer({ product, onChange, setDetailItem, }) {
+export default function ProductContainer({ product, onChange, quantity, }) {
   const changeToProductDetail = () =>{
-    setDetailItem(product);
     onChange();
   };
   return (
@@ -17,7 +15,7 @@ export default function ProductContainer({ product, onChange, setDetailItem, }) 
         />
         <div className='product-info'>
           <p className='product-title'>{product?.name}</p>
-          <p className='product-price'>{vndCurrency(product?.price)}</p>
+          <p className='product-price'>Số lượng: {quantity}</p>
         </div>
       </div>
     </>
@@ -27,6 +25,5 @@ export default function ProductContainer({ product, onChange, setDetailItem, }) 
 ProductContainer.propTypes = {
   product: PropTypes.object,
   onChange: PropTypes.func,
-  setDetailItem: PropTypes.func,
   quantity: PropTypes.number,
 };

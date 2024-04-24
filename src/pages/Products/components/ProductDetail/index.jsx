@@ -8,44 +8,19 @@ import { vndCurrency, } from '~/utils/format';
 export default function ProductDetail({
   detailStage,
   setDetailStage,
-  setMainStage,
+  setStoredStage,
   product,
-  getProducts,
-  setUpdateStage,
-  setTakedProduct,
 }) {
   
   const backMainStage = () => {
     setDetailStage(false);
-    setMainStage(true);
+    setStoredStage(true);
   };
   const [currentImageIndex, setCurrentImageIndex,] = useState(0);
   const goToSlide = (index) => {
     setCurrentImageIndex(index);
   };
-  const changetoUpdate = () => {
-    setTakedProduct(product);
-    setUpdateStage(true);
-    setDetailStage(false);
-  };
   console.log(product);
-  const deleteProduct = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/${product?.id}/`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status === 204) {
-          alert('Xóa sản phẩm thành công');
-          getProducts();
-          backMainStage();
-        }
-      })
-      .catch((error) => alert(error));
-  };
   return (
     <>
       {detailStage && (
@@ -87,6 +62,8 @@ export default function ProductDetail({
               <div className={'product-gender'}>Dành cho {product?.gender}</div>
               <div className={'product-price'}>
                 {vndCurrency(product?.price)}
+              </div><div className={'product-price'}>
+                Số lượng: {product?.quantity}
               </div>
               <div className={'product-description'}> Mô tả sản phẩm</div>
               <div
@@ -95,14 +72,6 @@ export default function ProductDetail({
                   __html: product?.description,
                 }}
               />
-              <div className={'info-button-container'}>
-                <button className={'info-button'} onClick={changetoUpdate}>
-                  Chỉnh sửa
-                </button>
-                <button className={'info-button'} onClick={deleteProduct}>
-                  Xóa
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -114,9 +83,6 @@ export default function ProductDetail({
 ProductDetail.propTypes = {
   detailStage: PropTypes.bool,
   setDetailStage: PropTypes.func,
-  setMainStage: PropTypes.func,
+  setStoredStage: PropTypes.func,
   product: PropTypes.object,
-  getProducts: PropTypes.func,
-  setUpdateStage: PropTypes.func,
-  setTakedProduct: PropTypes.func,
 };

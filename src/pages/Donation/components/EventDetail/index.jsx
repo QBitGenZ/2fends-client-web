@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, } from 'react';
 import PropTypes from 'prop-types';
-import { HeadTitle, } from '~/components';
+import { HeadTitle, Pagination, Title, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, } from '@fortawesome/free-solid-svg-icons';
+import { ProductContainer, } from '..';
 import './index.css';
 import moment from 'moment';
 export default function EventDetail({
@@ -10,12 +11,81 @@ export default function EventDetail({
   setDetailStage,
   setMainStage,
   event,
+  getEvents,
+  setUpdateStage,
+  setTakedEvent,
+  setProductDonate,
+  productDonate,
+  changeToProductDetail,
+  setQuantity,
 }) {
+  const [donationProduct, setDonationProduct,] = useState([]);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
+  useEffect(() => {
+    getDonationProduct();
+  }, [currentPage,]);
   const backMainStage = () => {
     setDetailStage(false);
     setMainStage(true);
   };
-  console.log(event);
+  console.log('Event',event);
+  const changetoUpdate = () => {
+    setTakedEvent(event);
+    setUpdateStage(true);
+    setDetailStage(false);
+  };
+  const deleteEvent = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/events/${event?.id}/`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status === 204) {
+          alert('Xóa sự kiện thành công');
+          getEvents();
+          backMainStage();
+        }
+      })
+      .catch((error) => alert(error));
+  };
+  const getDonationProduct = () => {
+    fetch(
+      `${process.env.REACT_APP_HOST_IP}/events/${event?.id}/donation_products/?page=${currentPage}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          Accept: 'application/json',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setDonationProduct(data?.data);
+        setTotalPage(data?.meta?.total_pages);
+      })
+      .catch((error) => console.log(error));
+  };
+  const getProductDonate = (product) => {
+    console.log('Product_id:',product?.id);
+    fetch(`${process.env.REACT_APP_HOST_IP}/products/${product?.product}/`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProductDonate(data.data);
+        setTotalPage(data?.meta?.total_pages);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <>
       {detailStage && (
@@ -50,13 +120,40 @@ export default function EventDetail({
                 {moment(event?.endAt).format('HH:mm DD/MM/YYYY')}
               </div>
               <div className={'product-description'}> Mô tả sự kiện</div>
-              <div className={'product-descripcon'}>
-                {event?.description} Hoa tay ZARA phiên bản mạ vàng sản xuất
-                2022. Sản phẩm chỉ mới sử dụng 2 lần nên còn rất mới, độ mới
-                khoảng 95%. Nếu có thắc mắc hãy liên hệ trực tiếp tôi. Tôi còn
-                rất nhiều sản phẩm tốt, hãy xem gian hàng của tôi.
+              <div
+                className={'product-descripcon'}
+                dangerouslySetInnerHTML={{
+                  __html: event?.description,
+                }}
+              />
+              <div className={'info-button-container'}>
+                <button className={'info-button'} onClick={changetoUpdate}>
+                  Chỉnh sửa
+                </button>
+                <button className={'info-button'} onClick={deleteEvent}>
+                  Xóa
+                </button>
               </div>
             </div>
+          </div>
+          <div style={{
+            paddingTop: '20px', 
+          }}>
+            <Title>Danh sách sản phẩm quyên góp</Title>
+          </div>
+          <div className={'donation-product'}>
+            {donationProduct?.map(
+              (product) => (
+                getProductDonate(product),
+                setQuantity(product?.quantity),
+                (<ProductContainer key={product?.id} product={productDonate} quantity={product?.quantity} onChange={changeToProductDetail} />)
+              )
+            )}
+            <Pagination
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+              totalPage={totalPage}
+            />
           </div>
         </div>
       )}
@@ -69,4 +166,11 @@ EventDetail.propTypes = {
   setDetailStage: PropTypes.func,
   setMainStage: PropTypes.func,
   event: PropTypes.object,
+  getEvents: PropTypes.func,
+  setUpdateStage: PropTypes.func,
+  setTakedEvent: PropTypes.func,
+  setProductDonate: PropTypes.func,
+  productDonate: PropTypes.object,
+  changeToProductDetail: PropTypes.func,
+  setQuantity: PropTypes.func,
 };
