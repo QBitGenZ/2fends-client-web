@@ -31,7 +31,7 @@ export default function Sales() {
   }, [currentPage, search,]);
   const getProducts = () => {
     fetch(
-      `${process.env.REACT_APP_HOST_IP}/products/myproducts/?page=${currentPage}`,
+      `${process.env.REACT_APP_HOST_IP}/products/myproducts/?page=${currentPage}&limit=12`,
       {
         method: 'GET',
         headers: {
