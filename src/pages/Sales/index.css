@@ -137,3 +137,35 @@
   width: 60%;
   margin: 15px 0 30px 0;
 }
+.chat-bot{
+  float: right;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.button-chatbot{
+  float: right;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 10px;
+  right: 10px;
+  overflow: hidden;
+}
+
+.button-chatbot.show{
+  float: right;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 10px;
+  right: 10px;
+  transform: translate(0,-360px);
+  overflow: hidden;
+}
+
+.button-chatbot > img{
+  width: 100%;
+    height: 100%; 
+    object-fit: cover;
+}
