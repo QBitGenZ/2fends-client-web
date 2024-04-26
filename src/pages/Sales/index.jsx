@@ -18,6 +18,7 @@ export default function Sales() {
   const [newProduct, setNewProduct,] = useState(null);
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
+  const [chatbot, setChatbox,] = useState(false);
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
@@ -71,6 +72,9 @@ export default function Sales() {
     setDetailStage(true);
     setMainStage(false);
   };
+  const displaychatbot = () => {
+    setChatbox(!chatbot);
+  };
   return (
     <>
       {mainstage && (
@@ -105,6 +109,21 @@ export default function Sales() {
               currentPage={currentPage}
               onPageChange={setCurrentPage}
             />
+          </div>
+          <div className={'chat-bot'} onClick={displaychatbot}>
+            <div className={chatbot?'button-chatbot show':'button-chatbot'}>
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/images/commons/chatbot.png`}
+              ></img>
+            </div>
+            {chatbot && (
+              <iframe
+                width='350'
+                height='430'
+                allow='microphone;'
+                src='https://console.dialogflow.com/api-client/demo/embedded/a6c4ecd8-a4ec-49c3-9d3f-5d3e84f30715'
+              ></iframe>
+            )}
           </div>
         </div>
       )}
