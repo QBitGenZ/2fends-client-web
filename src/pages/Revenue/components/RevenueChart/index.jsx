@@ -10,9 +10,10 @@ import React, { useState, useEffect, } from 'react';
 import { Line, } from 'react-chartjs-2';
 import './index.css';
 export default function RevenueChart() {
-  const [chartdata, setChartData,] = useState([]);
-  const [fromdate, setFromDate,] = useState('');
-  const [todate, setToDate,] = useState('');
+  const [chartdatarevenue, setChartDatarevenue,] = useState([]);
+  const [chartdatatotalsold, setChartDatatotalsold,] = useState([]);
+  const [fromdate, setFromDate,] = useState('2024-03-20');
+  const [todate, setToDate,] = useState('2024-06-25');
   useEffect(() => {
     loadStatis();
   }, []);
@@ -20,7 +21,7 @@ export default function RevenueChart() {
     console.log(fromdate);
     console.log(todate);
     fetch(
-      `${process.env.REACT_APP_HOST_IP}/statistics/my_revenue/?from_date=${fromdate}&to_date=${todate}`,
+      `${process.env.REACT_APP_HOST_IP}/statistics/my-revenue/?start_date=2024-03-20&end_date=2024-06-25`,
       {
         method: 'GET',
         headers: {
@@ -31,10 +32,25 @@ export default function RevenueChart() {
     )
       .then((res) => res.json())
       .then((data) => {
-        setChartData(data.data);
+        setChartDatarevenue(data?.data);
+        const transformedData = {
+        };
+        const transformedData1 = {
+        };
+        data?.data.forEach((item) => {
+          const monthYear = item.month.slice(0, 7); 
+          transformedData[monthYear] = item?.revenue; 
+        });
+        data?.data.forEach((item) => {
+          const monthYear = item.month.slice(0, 7); 
+          transformedData1[monthYear] = item?.total_sold; 
+        });
+        setChartDatarevenue(transformedData);
+        setChartDatatotalsold(transformedData1);
       })
       .catch((error) => console.log(error));
   };
+  console.log(chartdatarevenue);
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -45,11 +61,22 @@ export default function RevenueChart() {
     Legend
   );
   const data = {
-    labels: Object.keys(chartdata),
+    labels: Object.keys(chartdatarevenue),
     datasets: [
       {
-        label: 'Doanh thu',
-        data: Object.values(chartdata),
+        label: 'Doanh thu( VNĐ)',
+        data: Object.values(chartdatarevenue),
+        fill: true,
+        backgroundColor: '#006AFF',
+        pointBorderColor: 'black',
+        color: 'pink',
+        pointBorderWidth: 5,
+        pointRadius: 8,
+        tension: 0.4,
+      },
+      {
+        label: 'Số lượng bán( Sản phẩm)',
+        data: Object.values(chartdatatotalsold),
         fill: true,
         backgroundColor: '#006AFF',
         pointBorderColor: 'black',

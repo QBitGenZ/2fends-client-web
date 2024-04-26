@@ -43,13 +43,13 @@ export default function AddEvent({ getEvents, stageAdd, setStageAdd, setMainStag
     e.preventDefault();
     let selectedItems = document.querySelectorAll('.select-item-box.selected');
     selectedItems = Array.from(selectedItems).map((item) => {
-      return `${item.textContent}`;
+      return `<li>${item.textContent}</li>`;
     });
-    selectedItems = selectedItems.join(',');
+    selectedItems = selectedItems.join('');
     const newDescription =
       description +
-      '\n.Danh mục sản phẩm kêu gọi: ' +
-      `${selectedItems}.`;
+      '\n\rDanh mục sản phẩm kêu gọi: ' +
+      `<ul>${selectedItems}</ul>`;
     console.log(startTime,endTime);
     console.log(changeTime(startTime),changeTime(endTime));
     const form = new FormData();
