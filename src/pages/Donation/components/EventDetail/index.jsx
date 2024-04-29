@@ -71,7 +71,7 @@ export default function EventDetail({
       .catch((error) => console.log(error));
   };
   const getProductDonate = (product) => {
-    console.log('Product_id:',product?.id);
+    console.log('Product_id:',product?.product);
     fetch(`${process.env.REACT_APP_HOST_IP}/products/${product?.product}/`, {
       method: 'GET',
       headers: {
@@ -81,8 +81,7 @@ export default function EventDetail({
     })
       .then((res) => res.json())
       .then((data) => {
-        setProductDonate(data.data);
-        setTotalPage(data?.meta?.total_pages);
+        setProductDonate(data?.data);
       })
       .catch((error) => console.log(error));
   };
