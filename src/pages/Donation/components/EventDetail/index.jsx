@@ -14,10 +14,9 @@ export default function EventDetail({
   getEvents,
   setUpdateStage,
   setTakedEvent,
-  setProductDonate,
-  productDonate,
   changeToProductDetail,
   setQuantity,
+  setProductDonate,
 }) {
   const [donationProduct, setDonationProduct,] = useState([]);
   const [currentPage, setCurrentPage,] = useState(1);
@@ -67,21 +66,6 @@ export default function EventDetail({
       .then((data) => {
         setDonationProduct(data?.data);
         setTotalPage(data?.meta?.total_pages);
-      })
-      .catch((error) => console.log(error));
-  };
-  const getProductDonate = (product) => {
-    console.log('Product_id:',product?.product);
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/${product?.product}/`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setProductDonate(data?.data);
       })
       .catch((error) => console.log(error));
   };
@@ -143,9 +127,8 @@ export default function EventDetail({
           <div className={'donation-product'}>
             {donationProduct?.map(
               (product) => (
-                getProductDonate(product),
                 setQuantity(product?.quantity),
-                (<ProductContainer key={product?.id} product={productDonate} quantity={product?.quantity} onChange={changeToProductDetail} />)
+                (<ProductContainer key={product?.id} product={product?.product} quantity={product?.quantity} onChange={changeToProductDetail} setProductDonate={setProductDonate} />)
               )
             )}
             <Pagination

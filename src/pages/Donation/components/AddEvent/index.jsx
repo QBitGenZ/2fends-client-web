@@ -69,7 +69,10 @@ export default function AddEvent({ getEvents, stageAdd, setStageAdd, setMainStag
       .then((res) => {
         if(res.status===401){
           return Promise.reject('Bạn không phải nhà từ thiện');
-        }else if(res.status===201){
+        }else if(res.status === 400){
+          return Promise.reject('Vui lòng điền đầy đủ tên, ngày bắt đầu, kết thúc sự kiện');
+        } if(res.status===201){
+          alert('Tạo sự kiện thành công');
           getEvents();
           backMainStage();
         }

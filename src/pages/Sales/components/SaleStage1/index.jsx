@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, } from 'react';
-import { HeadTitle, SelectItemBox, Title, } from '~/components';
+import { HeadTitle, InputRadio, Title, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft, } from '@fortawesome/free-solid-svg-icons';
 export default function SaleStage1({
@@ -77,9 +77,9 @@ export default function SaleStage1({
               <Title>Giới tính</Title>
             </div>
             <div className={'gender'}>
-              <SelectItemBox>Nam</SelectItemBox>
-              <SelectItemBox>Nữ</SelectItemBox>
-              <SelectItemBox>Unisex</SelectItemBox>
+              <InputRadio>Nam</InputRadio>
+              <InputRadio>Nữ</InputRadio>
+              <InputRadio>Unisex</InputRadio>
             </div>
           </div>
           <div className={'sales-smallcontainer'}>
@@ -88,7 +88,7 @@ export default function SaleStage1({
             </div>
             <div className={'product-type'}>
               {types?.map((type) => (
-                <SelectItemBox key={type?.id} value={type?.id}>{type?.name}</SelectItemBox>
+                <InputRadio key={type?.id} value={type?.id}>{type?.name}</InputRadio>
               ))}
             </div>
           </div>
@@ -97,12 +97,12 @@ export default function SaleStage1({
               <Title>Kích cỡ</Title>
             </div>
             <div className={'product-size'}>
-              <SelectItemBox>S</SelectItemBox>
-              <SelectItemBox>M</SelectItemBox>
-              <SelectItemBox>L</SelectItemBox>
-              <SelectItemBox>XL</SelectItemBox>
-              <SelectItemBox>2XL</SelectItemBox>
-              <SelectItemBox>3XL</SelectItemBox>
+              <InputRadio>S</InputRadio>
+              <InputRadio>M</InputRadio>
+              <InputRadio>L</InputRadio>
+              <InputRadio>XL</InputRadio>
+              <InputRadio>2XL</InputRadio>
+              <InputRadio>3XL</InputRadio>
             </div>
           </div>
         </div>
