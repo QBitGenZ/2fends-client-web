@@ -73,18 +73,24 @@ export default function SaleStage2({
     form.append('degree', degree);
     form.append('gender', newProduct.gender);
     if (proName === undefined || proName === ' ' || proName === '') {
-      alert('Tên sản phẩm không hợp lệ');
-    } else if (Number(proPrice) === undefined || Number(proPrice) <= 0) {
-      alert('Giá sản phẩm không hợp lệ');
-    } else if (Number(proQuantity) === undefined || Number(proQuantity) <= 0) {
-      alert('Số lượng sản phẩm không hợp lệ');
-    } else if (degree === undefined) {
-      alert('Tình trạng sản phẩm không hợp lệ');
-    } else if (newProduct.gender === undefined) {
-      alert('Giới tính sử dụng không hợp lệ');
-    } else if (newProduct.size === undefined) {
-      alert('Kích thước không không hợp lệ');
-    } else {
+      return alert('Tên sản phẩm không hợp lệ');
+    }
+    if (proPrice === undefined || Number(proPrice) <= 0) {
+      return alert('Giá sản phẩm không hợp lệ');
+    }
+    if (proQuantity === undefined || Number(proQuantity) <= 0) {
+      return alert('Số lượng sản phẩm không hợp lệ');
+    } 
+    if (degree === undefined) {
+      return alert('Tình trạng sản phẩm không hợp lệ');
+    }
+    if (newProduct.gender === undefined) {
+      return alert('Giới tính sử dụng không hợp lệ');
+    }
+    if (newProduct.size === undefined) {
+      return alert('Kích thước không không hợp lệ');
+    }
+    {
       fetch(`${process.env.REACT_APP_HOST_IP}/products/`, {
         method: 'POST',
         headers: {

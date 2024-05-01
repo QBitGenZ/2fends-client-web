@@ -56,7 +56,7 @@ export default function Information() {
             </tr>
             <tr>
               <td className={'info-th'}>Giới tính</td>
-              <td>{info?.is_female ? 'Nữ' : 'Nam'}</td>
+              <td>{info?.is_female ? 'Nam' : 'Nữ'}</td>
             </tr>
             <tr>
               <td className={'info-th'}>Số điện thoại</td>
