@@ -80,7 +80,6 @@ export default function Products() {
             <table id='ProductTable'>
               <tr className='propdtabletr'>
                 <th className='prodtabletdth prodtableth'>STT</th>
-                <th className='prodtabletdth prodtableth'>Người đăng</th>
                 <th className='prodtabletdth prodtableth'>Tên sản phẩm</th>
                 <th className='prodtabletdth prodtableth'>
                   Thời gian đăng tải
@@ -96,9 +95,6 @@ export default function Products() {
                   >
                     <td className='prodtabletd prodtabletdth'>
                       {index+1}
-                    </td>
-                    <td className='prodtabletd prodtabletdth'>
-                      {product?.user}
                     </td>
                     <td className='prodtabletd prodtabletdth'>
                       {product?.name}
