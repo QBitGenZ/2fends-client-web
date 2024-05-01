@@ -111,7 +111,7 @@ export default function Sales() {
             />
           </div>
           <div className={'chat-bot'} onClick={displaychatbot}>
-            <div className={chatbot?'button-chatbot show':'button-chatbot'}>
+            <div className={chatbot ? 'button-chatbot show' : 'button-chatbot'}>
               <img
                 src={`${process.env.PUBLIC_URL}/assets/images/commons/chatbot.png`}
               ></img>
@@ -150,6 +150,7 @@ export default function Sales() {
       )}
       {detailStage && (
         <ProductDetail
+          setDetailProduct={setDetailProduct}
           product={detailProduct}
           detailStage={detailStage}
           setDetailStage={setDetailStage}
@@ -161,6 +162,7 @@ export default function Sales() {
       )}
       {updateStage && (
         <UpdateProduct
+          setDetailProduct={setDetailProduct}
           updateStage={updateStage}
           setUpdateStage={setUpdateStage}
           setDetailStage={setDetailStage}

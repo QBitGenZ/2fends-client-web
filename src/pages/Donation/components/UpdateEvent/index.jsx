@@ -16,6 +16,7 @@ export default function UpdateEvent({
   setUpdateStage,
   setDetailStage,
   getEvents,
+  setDetailEvent,
 }) {
   const [name, setName,] = useState(event?.name);
   const [proType, setProType,] = useState();
@@ -66,10 +67,12 @@ export default function UpdateEvent({
           alert('Cập nhật sự kiện thành công');
           getEvents();
           backDetail();
+          return res.json();
         } else {
           return Promise.reject('Chỉnh sửa sự kiện không thành công');
         }
       })
+      .then((data)=>setDetailEvent(data?.data))
       .catch((error) => alert(error));
   };
   const [imageFiles, setImageFiles,] = useState();
@@ -203,4 +206,5 @@ UpdateEvent.propTypes = {
   setUpdateStage: PropTypes.func,
   updateStage: PropTypes.bool,
   getEvents: PropTypes.func,
+  setDetailEvent: PropTypes.func,
 };

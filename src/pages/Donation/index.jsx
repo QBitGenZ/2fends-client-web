@@ -136,6 +136,7 @@ export default function Donation() {
         )}
         {updateStage && (
           <UpdateEvent
+            setDetailEvent={setDetailEvent}
             event={takedEvents}
             setUpdateStage={setUpdateStage}
             updateStage={updateStage}
