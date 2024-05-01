@@ -109,6 +109,9 @@ export default function SaleStage2({
         .catch((error) => console.log(error));
     }
   };
+  console.log('Gender',newProduct.gender);
+  console.log('Size',newProduct.size);
+  console.log('Type',newProduct.product_type);
   return (
     <>
       {stage2 && (

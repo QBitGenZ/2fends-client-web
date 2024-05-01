@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { HeadTitle, InputRadio, Title, } from '~/components';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft, } from '@fortawesome/free-solid-svg-icons';
+import './index.css';
 export default function SaleStage1({
   stage1,
   setStage1,
@@ -39,14 +40,17 @@ export default function SaleStage1({
     setStage1(false);
     setMainStage(true);
   };
+  const [gender, setGender,] = useState('Nam');
+  const [loaisp, setLoaisp, ] = useState('Nam');
+  const [size, setSize, ] = useState('Nam');
   const addInnformation = () => {
-    const gender = document.querySelector('.gender>.select-item-box.selected')?.textContent;
-    const product_type=document.querySelector('.product-type>.select-item-box.selected')?.getAttribute('id');
-    const product_size=document.querySelector('.product-size>.select-item-box.selected')?.textContent;
+    // const gender = document.querySelector('.gender>.select-item-box.selected')?.textContent;
+    // const product_type=document.querySelector('.product-type>.select-item-box.selected')?.getAttribute('id');
+    // const product_size=document.querySelector('.product-size>.select-item-box.selected')?.textContent;
     setNewProduct({
       gender:gender,
-      product_type:product_type,
-      size:product_size,
+      product_type:loaisp,
+      size:size,
     });
   };
   return (
@@ -76,19 +80,19 @@ export default function SaleStage1({
             <div>
               <Title>Giới tính</Title>
             </div>
-            <div className={'gender'}>
-              <InputRadio>Nam</InputRadio>
-              <InputRadio>Nữ</InputRadio>
-              <InputRadio>Unisex</InputRadio>
+            <div className={'buttons'}>
+              <InputRadio setValue={setGender} name={'gender'} value={'Nam'}>Nam</InputRadio>
+              <InputRadio setValue={setGender} name={'gender'} value={'Nữ'}>Nữ</InputRadio>
+              <InputRadio setValue={setGender} name={'gender'} value={'Unisex'}>Unisex</InputRadio>
             </div>
           </div>
           <div className={'sales-smallcontainer'}>
             <div>
               <Title>Loại sản phẩm</Title>
             </div>
-            <div className={'product-type'}>
+            <div className={'buttons'}>
               {types?.map((type) => (
-                <InputRadio key={type?.id} value={type?.id}>{type?.name}</InputRadio>
+                <InputRadio key={type?.id} value={type?.id} setValue={setLoaisp} name={'type'}>{type?.name}</InputRadio>
               ))}
             </div>
           </div>
@@ -96,13 +100,13 @@ export default function SaleStage1({
             <div>
               <Title>Kích cỡ</Title>
             </div>
-            <div className={'product-size'}>
-              <InputRadio>S</InputRadio>
-              <InputRadio>M</InputRadio>
-              <InputRadio>L</InputRadio>
-              <InputRadio>XL</InputRadio>
-              <InputRadio>2XL</InputRadio>
-              <InputRadio>3XL</InputRadio>
+            <div className={'buttons'}>
+              <InputRadio setValue={setSize} name={'Size'} value={'S'}>S</InputRadio>
+              <InputRadio setValue={setSize} name={'Size'} value={'M'}>M</InputRadio>
+              <InputRadio setValue={setSize} name={'Size'} value={'L'}>L</InputRadio>
+              <InputRadio setValue={setSize} name={'Size'} value={'XL'}>XL</InputRadio>
+              <InputRadio setValue={setSize} name={'Size'} value={'2XL'}>2XL</InputRadio>
+              <InputRadio setValue={setSize} name={'Size'} value={'3XL'}>3XL</InputRadio>
             </div>
           </div>
         </div>
