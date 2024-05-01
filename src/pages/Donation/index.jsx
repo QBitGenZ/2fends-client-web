@@ -19,6 +19,7 @@ export default function Donation() {
   const [detailProduct, setDetailProduct,] = useState(false);
   const [productDonate, setProductDonate,] = useState();
   const [quantity, setQuantity,] = useState();
+  const [total, setTotal,] = useState(0);
   const changeToProductDetail = () => {
     setDetailStage(false);
     setDetailProduct(true);
@@ -46,6 +47,7 @@ export default function Donation() {
       .then((data) => {
         setEvent(data?.data);
         setTotalPage(data?.meta?.total_pages);
+        setTotal(data?.meta?.total);
       })
       .catch((error) => console.log(error));
   };
@@ -73,6 +75,7 @@ export default function Donation() {
     setDetailStage(true);
     setMainStage(false);
   };
+  const pagination = total > 0 ? true : false;
   return (
     <>
       <div id={'donation'}>
@@ -103,11 +106,13 @@ export default function Donation() {
                   />
                 ))}
               </div>
-              <Pagination
-                totalPage={totalPage}
-                currentPage={currentPage}
-                onPageChange={setCurrentPage}
-              />
+              {pagination && (
+                <Pagination
+                  totalPage={totalPage}
+                  currentPage={currentPage}
+                  onPageChange={setCurrentPage}
+                />
+              )}
             </div>
           </div>
         )}
