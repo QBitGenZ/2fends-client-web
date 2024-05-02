@@ -79,7 +79,7 @@ export default function Products() {
           <div className={'Product-Table'}>
             <table id='ProductTable'>
               <tr className='propdtabletr'>
-                <th className='prodtabletdth prodtableth'>Người đăng</th>
+                <th className='prodtabletdth prodtableth'>STT</th>
                 <th className='prodtabletdth prodtableth'>Tên sản phẩm</th>
                 <th className='prodtabletdth prodtableth'>
                   Thời gian đăng tải
@@ -87,14 +87,14 @@ export default function Products() {
                 <th className='prodtabletdth prodtableth'>Số lượng</th>
               </tr>
               <tbody>
-                {products.map((product) => (
+                {products.map((product,index) => (
                   <tr
                     key={product?.id}
                     className='ModalBtn propdtabletr'
                     onClick={() => toDetail(product)}
                   >
                     <td className='prodtabletd prodtabletdth'>
-                      {product?.user}
+                      {index+1}
                     </td>
                     <td className='prodtabletd prodtabletdth'>
                       {product?.name}

@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
 
-export default function ProductContainer({ product, onChange, quantity, }) {
+export default function ProductContainer({ product, onChange, quantity, setProductDonate, }) {
   const changeToProductDetail = () =>{
+    setProductDonate(product);
     onChange();
   };
   return (
@@ -26,4 +27,5 @@ ProductContainer.propTypes = {
   product: PropTypes.object,
   onChange: PropTypes.func,
   quantity: PropTypes.number,
+  setProductDonate: PropTypes.object,
 };

@@ -14,14 +14,14 @@ export default function EventDetail({
   getEvents,
   setUpdateStage,
   setTakedEvent,
-  setProductDonate,
-  productDonate,
   changeToProductDetail,
   setQuantity,
+  setProductDonate,
 }) {
   const [donationProduct, setDonationProduct,] = useState([]);
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
+  const [total, setTotal,] = useState(0);
   useEffect(() => {
     getDonationProduct();
   }, [currentPage,]);
@@ -29,7 +29,7 @@ export default function EventDetail({
     setDetailStage(false);
     setMainStage(true);
   };
-  console.log('Event',event);
+  console.log('Event', event);
   const changetoUpdate = () => {
     setTakedEvent(event);
     setUpdateStage(true);
@@ -67,24 +67,11 @@ export default function EventDetail({
       .then((data) => {
         setDonationProduct(data?.data);
         setTotalPage(data?.meta?.total_pages);
+        setTotal(data?.meta?.total);
       })
       .catch((error) => console.log(error));
   };
-  const getProductDonate = (product) => {
-    console.log('Product_id:',product?.product);
-    fetch(`${process.env.REACT_APP_HOST_IP}/products/${product?.product}/`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
-        Accept: 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setProductDonate(data?.data);
-      })
-      .catch((error) => console.log(error));
-  };
+  const pagination = total > 0 ? true : false;
   return (
     <>
       {detailStage && (
@@ -135,24 +122,35 @@ export default function EventDetail({
               </div>
             </div>
           </div>
-          <div style={{
-            paddingTop: '20px', 
-          }}>
+          <div
+            style={{
+              paddingTop: '20px',
+            }}
+          >
             <Title>Danh sách sản phẩm quyên góp</Title>
           </div>
           <div className={'donation-product'}>
             {donationProduct?.map(
               (product) => (
-                getProductDonate(product),
                 setQuantity(product?.quantity),
-                (<ProductContainer key={product?.id} product={productDonate} quantity={product?.quantity} onChange={changeToProductDetail} />)
+                (
+                  <ProductContainer
+                    key={product?.id}
+                    product={product?.product}
+                    quantity={product?.quantity}
+                    onChange={changeToProductDetail}
+                    setProductDonate={setProductDonate}
+                  />
+                )
               )
             )}
-            <Pagination
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-              totalPage={totalPage}
-            />
+            {pagination && (
+              <Pagination
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                totalPage={totalPage}
+              />
+            )}
           </div>
         </div>
       )}

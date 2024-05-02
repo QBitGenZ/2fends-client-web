@@ -12,8 +12,8 @@ import './index.css';
 export default function RevenueChart() {
   const [chartdatarevenue, setChartDatarevenue,] = useState([]);
   const [chartdatatotalsold, setChartDatatotalsold,] = useState([]);
-  const [fromdate, setFromDate,] = useState('2024-03-20');
-  const [todate, setToDate,] = useState('2024-06-25');
+  const [fromdate, setFromDate,] = useState('2024-01-01');
+  const [todate, setToDate,] = useState('2024-12-28');
   useEffect(() => {
     loadStatis();
   }, []);
@@ -21,7 +21,7 @@ export default function RevenueChart() {
     console.log(fromdate);
     console.log(todate);
     fetch(
-      `${process.env.REACT_APP_HOST_IP}/statistics/my-revenue/?start_date=2024-03-20&end_date=2024-06-25`,
+      `${process.env.REACT_APP_HOST_IP}/statistics/my-revenue/?start_date=${fromdate}&end_date=${todate}`,
       {
         method: 'GET',
         headers: {

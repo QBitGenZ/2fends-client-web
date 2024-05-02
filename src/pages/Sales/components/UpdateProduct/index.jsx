@@ -13,6 +13,7 @@ export default function UpdateProduct({
   setUpdateStage,
   setDetailStage,
   getProducts,
+  setDetailProduct,
 }) {
   const [proName, setProName,] = useState(product?.name);
   const [proType, setProType,] = useState([]);
@@ -32,18 +33,6 @@ export default function UpdateProduct({
     setUpdateStage(false);
   };
   console.log(updateStage);
-  //   const [imageFiles, setImageFiles,] = useState(product?.product_image);
-
-  //   const handleImageChange = (event) => {
-  //     const files = event.target.files;
-  //     setImageFiles([...files,]);
-  //   };
-
-  //   const handleRemoveImage = (index) => {
-  //     const updatedImages = [...imageFiles,];
-  //     updatedImages.splice(index, 1);
-  //     setImageFiles(updatedImages);
-  //   };
   const getUser = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/info`, {
       method: 'GET',
@@ -95,9 +84,14 @@ export default function UpdateProduct({
           alert('Cập nhật sản phẩm thành công');
           getProducts();
           backDetail();
+          return res.json();
         } else {
           return Promise.reject('Chỉnh sửa sản phẩm không thành công');
         }
+      })
+      .then((data)=>{
+        console.log('Data:',data?.data);
+        setDetailProduct(data?.data);
       })
       .catch((error) => alert(error));
   };
@@ -291,4 +285,5 @@ UpdateProduct.propTypes = {
   setUpdateStage: PropTypes.func,
   updateStage: PropTypes.bool,
   getProducts: PropTypes.func,
+  setDetailProduct: PropTypes.func,
 };

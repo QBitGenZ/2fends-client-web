@@ -2,7 +2,6 @@ import React, { useState, } from 'react';
 import { HeadTitle, } from '~/components';
 import PropTypes from 'prop-types';
 export default function ChangePassword({
-  info,
   setMainStge,
   setChangePassStage,
   getInfo,
@@ -11,13 +10,14 @@ export default function ChangePassword({
   const [newpass, setNewPass,] = useState();
   const [confirm, setConfirm,] = useState();
 
-  function changeInfor(e) {
+  function changeInfor() {
     if(confirm != newpass) {
       return alert('Không khớp');
     }
-    e.preventDefault();
+    if(newpass.length<8){
+      return alert('Mật khẩu phải lớn hơn 8 ký tự');
+    }
     const form = new FormData();
-    console.log(info);
     form.append('old_password', oldpass);
     form.append('new_password', newpass);
     fetch(`${process.env.REACT_APP_HOST_IP}/change-password`, {
@@ -29,11 +29,13 @@ export default function ChangePassword({
       body: form,
     })
       .then((res) => {
-        if (res.status === 200) return res.json();
+        if (res.status === 200){
+          alert('Thay đổi mật khẩu thành công');
+          getInfo();
+          backMainStage();
+        }
         else return Promise.reject('Thông tin không hợp lệ');
       })
-      .then((res) => res.json)
-      .then(() => getInfo())
       .catch((error) => alert(error));
   }
   const backMainStage = () => {
@@ -51,7 +53,7 @@ export default function ChangePassword({
           <td className={'info-th'}>Mật khẩu cũ</td>
           <td>
             <input
-              type='text'
+              type='password'
               id='full_name'
               name='full_name'
               className={'updatefield'}
@@ -60,10 +62,10 @@ export default function ChangePassword({
           </td>
         </tr>
         <tr>
-          <td className={'info-th'}>Mật khẩu cũ</td>
+          <td className={'info-th'}>Mật khẩu mới</td>
           <td className={'info-th'}>
             <input
-              type='text'
+              type='password'
               id='full_name'
               name='full_name'
               className={'updatefield'}
@@ -75,7 +77,7 @@ export default function ChangePassword({
           <td className={'info-th'}>Xác nhận mật khẩu</td>
           <td className={'info-th'}>
             <input
-              type='text'
+              type='password'
               id='full_name'
               name='full_name'
               className={'updatefield'}

@@ -19,6 +19,7 @@ export default function Sales() {
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
   const [chatbot, setChatbox,] = useState(false);
+  const [total, setTotal,] = useState(0);
   const openS1 = () => {
     setStage1(true);
     setMainStage(false);
@@ -45,6 +46,7 @@ export default function Sales() {
       .then((data) => {
         setProduct(data?.data);
         setTotalPage(data?.meta?.total_pages);
+        setTotal(data?.meta?.total);
       })
       .catch((error) => console.log(error));
   };
@@ -75,6 +77,7 @@ export default function Sales() {
   const displaychatbot = () => {
     setChatbox(!chatbot);
   };
+  const pagination = total > 0 ? true : false;
   return (
     <>
       {mainstage && (
@@ -104,14 +107,16 @@ export default function Sales() {
                 />
               ))}
             </div>
-            <Pagination
-              totalPage={totalPage}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-            />
+            {pagination && (
+              <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            )}
           </div>
           <div className={'chat-bot'} onClick={displaychatbot}>
-            <div className={chatbot?'button-chatbot show':'button-chatbot'}>
+            <div className={chatbot ? 'button-chatbot show' : 'button-chatbot'}>
               <img
                 src={`${process.env.PUBLIC_URL}/assets/images/commons/chatbot.png`}
               ></img>
@@ -150,6 +155,7 @@ export default function Sales() {
       )}
       {detailStage && (
         <ProductDetail
+          setDetailProduct={setDetailProduct}
           product={detailProduct}
           detailStage={detailStage}
           setDetailStage={setDetailStage}
@@ -161,6 +167,7 @@ export default function Sales() {
       )}
       {updateStage && (
         <UpdateProduct
+          setDetailProduct={setDetailProduct}
           updateStage={updateStage}
           setUpdateStage={setUpdateStage}
           setDetailStage={setDetailStage}

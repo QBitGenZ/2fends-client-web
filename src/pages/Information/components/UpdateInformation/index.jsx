@@ -1,6 +1,7 @@
 import React, { useState, } from 'react';
-import { HeadTitle, } from '~/components';
+import { HeadTitle, Selection, } from '~/components';
 import PropTypes from 'prop-types';
+import './index.css';
 export default function UpdateInformation({
   info,
   getInfo,
@@ -90,15 +91,19 @@ export default function UpdateInformation({
             />
           </td>
         </tr>
-        <tr>
+        <tr id='gender-select' >
           <td className={'info-th'}>Giới tính</td>
           <td>
-            <input
-              name='gender'
-              value={gender}
-              className='updatefield'
-              onChange={(e) => setGender(e.target.value)}
-            />
+            <Selection options={[
+              {
+                label: 'Nam',
+                value: true,
+              },
+              {
+                label: 'Nữ',
+                value: false,
+              },
+            ]} value={gender} setValue={setGender}/>
           </td>
         </tr>
         <tr>

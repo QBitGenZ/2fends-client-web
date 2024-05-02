@@ -8,7 +8,8 @@ import DateTimeInput from './DateTimeInput';
 import HeadTitle from './HeadTitle';
 import Pagination from './Pagination';
 import Selection from './Selection';
+import InputRadio from './RadioInput';
 
 export {
-  Title, SelectItemBox, SelectItemIconBox, TextInput, Sidebar,TextAreaInput, DateTimeInput, HeadTitle, Pagination, Selection,
+  Title, SelectItemBox, SelectItemIconBox, TextInput, Sidebar,TextAreaInput, DateTimeInput, HeadTitle, Pagination, Selection, InputRadio,
 };
